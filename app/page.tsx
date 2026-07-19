@@ -1,7 +1,7 @@
 export default function Home() {
   return (
     <main className="min-h-screen bg-[#081220] text-white">
-      <header className="mx-auto flex max-w-[1400px] items-center justify-between px-12 py-5">
+      <header className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-5 md:px-12">
         <div className="flex items-center gap-3">
           <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#D4AF37] text-2xl font-bold text-[#081220]">
             U
@@ -9,7 +9,9 @@ export default function Home() {
 
           <div>
             <p className="text-lg tracking-[0.35em]">UNSEEN</p>
-            <p className="text-xs tracking-[0.45em] text-[#D4AF37]">WORLD</p>
+            <p className="text-xs tracking-[0.45em] text-[#D4AF37]">
+              WORLD
+            </p>
           </div>
         </div>
 
@@ -41,7 +43,8 @@ export default function Home() {
           </p>
 
           <p className="mt-4 max-w-xl text-base leading-7 text-slate-400">
-            Discover the UK through custom-built tours, private transfers, unforgettable Highland experiences and worldwide holidays.
+            Discover the UK through custom-built tours, private transfers,
+            unforgettable Highland experiences and worldwide holidays.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-4">
@@ -49,7 +52,7 @@ export default function Home() {
               Plan My Journey
             </button>
 
-            <button className="rounded-lg border border-white/40 px-6 py-3 font-semibold hover:bg-white hover:text-[#081220]">
+            <button className="rounded-lg border border-white/40 px-6 py-3 font-semibold transition hover:bg-white hover:text-[#081220]">
               Explore Scotland
             </button>
           </div>
@@ -65,45 +68,132 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-r from-[#081220]/45 via-transparent to-transparent" />
         </div>
       </section>
-    <section className="mx-auto max-w-[1400px] px-12 py-20">
 
-  <h2 className="mb-12 text-center text-4xl font-semibold">
-    Travel services, designed around you.
-  </h2>
+      <section className="mx-auto max-w-[1400px] px-6 py-20 md:px-12">
+        <h2 className="mb-12 text-center text-4xl font-semibold">
+          Travel services, designed around you.
+        </h2>
 
-  <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-8">
+            <h3 className="mb-4 text-2xl font-semibold">
+              Airport Transfers
+            </h3>
 
-    <div className="rounded-2xl border border-white/10 bg-white/5 p-8">
-      <h3 className="mb-4 text-2xl font-semibold">Airport Transfers</h3>
-      <p className="text-slate-300">
-        Luxury airport transfers across the UK with professional drivers and fixed pricing.
-      </p>
-    </div>
+            <p className="text-slate-300">
+              Luxury airport transfers across the UK with professional drivers
+              and fixed pricing.
+            </p>
+          </div>
 
-    <div className="rounded-2xl border border-white/10 bg-white/5 p-8">
-      <h3 className="mb-4 text-2xl font-semibold">Private Tours</h3>
-      <p className="text-slate-300">
-  Tailor-made private tours across Scotland, England and beyond, designed around your interests.
-</p>
-    </div>
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-8">
+            <h3 className="mb-4 text-2xl font-semibold">Private Tours</h3>
 
-    <div className="rounded-2xl border border-white/10 bg-white/5 p-8">
-      <h3 className="mb-4 text-2xl font-semibold">Worldwide Holidays</h3>
-      <p className="text-slate-300">
-        Discover handpicked holidays through our trusted travel partners around the world.
-      </p>
-    </div>
+            <p className="text-slate-300">
+              Tailor-made private tours across Scotland, England and beyond,
+              designed around your interests.
+            </p>
+          </div>
 
-    <div className="rounded-2xl border border-white/10 bg-white/5 p-8">
-      <h3 className="mb-4 text-2xl font-semibold">AI Trip Planner</h3>
-      <p className="text-slate-300">
-        Tell us your dream trip and let Unseen AI build the perfect itinerary for you.
-      </p>
-    </div>
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-8">
+            <h3 className="mb-4 text-2xl font-semibold">
+              Worldwide Holidays
+            </h3>
 
-  </div>
+            <p className="text-slate-300">
+              Discover handpicked holidays through our trusted travel partners
+              around the world.
+            </p>
+          </div>
 
-</section>  
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-8">
+            <h3 className="mb-4 text-2xl font-semibold">AI Trip Planner</h3>
+
+            <p className="text-slate-300">
+              Tell us your dream trip and let Unseen AI build the perfect
+              itinerary for you.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-[1400px] px-6 py-24 md:px-12">
+        <div className="overflow-hidden rounded-[32px] border border-white/10 bg-white/[0.06] shadow-2xl backdrop-blur-xl">
+          <div className="border-b border-white/10 px-6 py-8 md:px-10">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-[#D4AF37]">
+              Start your journey
+            </p>
+
+            <h2 className="text-3xl font-semibold md:text-5xl">
+              Where would you like to go?
+            </h2>
+
+            <p className="mt-4 max-w-2xl text-base leading-7 text-slate-300 md:text-lg">
+              Book a private transfer or tell us about the journey you would
+              like us to create.
+            </p>
+          </div>
+
+          <form className="grid gap-5 p-6 md:grid-cols-2 md:p-10 lg:grid-cols-5">
+            <label className="block">
+              <span className="mb-2 block text-sm font-medium text-slate-300">
+                Service
+              </span>
+
+              <select className="h-14 w-full rounded-xl border border-white/10 bg-slate-950 px-4 text-white outline-none transition focus:border-[#D4AF37]">
+                <option>Airport Transfer</option>
+                <option>Private Tour</option>
+                <option>Worldwide Holiday</option>
+                <option>Custom Journey</option>
+              </select>
+            </label>
+
+            <label className="block">
+              <span className="mb-2 block text-sm font-medium text-slate-300">
+                Pick-up location
+              </span>
+
+              <input
+                type="text"
+                placeholder="Airport, hotel or address"
+                className="h-14 w-full rounded-xl border border-white/10 bg-slate-950 px-4 text-white outline-none transition placeholder:text-slate-500 focus:border-[#D4AF37]"
+              />
+            </label>
+
+            <label className="block">
+              <span className="mb-2 block text-sm font-medium text-slate-300">
+                Destination
+              </span>
+
+              <input
+                type="text"
+                placeholder="Where are you going?"
+                className="h-14 w-full rounded-xl border border-white/10 bg-slate-950 px-4 text-white outline-none transition placeholder:text-slate-500 focus:border-[#D4AF37]"
+              />
+            </label>
+
+            <label className="block">
+              <span className="mb-2 block text-sm font-medium text-slate-300">
+                Travel date
+              </span>
+
+              <input
+                type="date"
+                className="h-14 w-full rounded-xl border border-white/10 bg-slate-950 px-4 text-white outline-none transition focus:border-[#D4AF37]"
+              />
+            </label>
+
+            <div className="flex items-end">
+              <button
+                type="submit"
+                className="h-14 w-full rounded-xl bg-[#D4AF37] px-6 font-semibold text-[#081220] transition hover:opacity-90"
+              >
+                Plan My Journey
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
     </main>
   );
 }
