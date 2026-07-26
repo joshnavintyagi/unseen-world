@@ -1,6 +1,7 @@
 import BookingSearch from "./components/BookingSearch";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
+import Services from "./components/Services";
 
 export default function Home() {
   return (
@@ -8,66 +9,7 @@ export default function Home() {
       <Header />
       <Hero />
       <BookingSearch />
-
-      <section className="mx-auto max-w-[1400px] px-6 py-20 md:px-12">
-        <h2 className="mb-12 text-center text-4xl font-semibold">
-          Travel services, designed around you.
-        </h2>
-
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-          <div
-            id="transfers"
-            className="rounded-2xl border border-white/10 bg-white/5 p-8"
-          >
-            <h3 className="mb-4 text-2xl font-semibold">
-              Airport Transfers
-            </h3>
-
-            <p className="leading-7 text-slate-300">
-              Luxury airport transfers across the UK with professional drivers
-              and fixed pricing.
-            </p>
-          </div>
-
-          <div
-            id="tours"
-            className="rounded-2xl border border-white/10 bg-white/5 p-8"
-          >
-            <h3 className="mb-4 text-2xl font-semibold">Private Tours</h3>
-
-            <p className="leading-7 text-slate-300">
-              Tailor-made private tours across Scotland, England and beyond,
-              designed around your interests.
-            </p>
-          </div>
-
-          <div
-            id="holidays"
-            className="rounded-2xl border border-white/10 bg-white/5 p-8"
-          >
-            <h3 className="mb-4 text-2xl font-semibold">
-              Worldwide Holidays
-            </h3>
-
-            <p className="leading-7 text-slate-300">
-              Discover handpicked holidays through our trusted travel partners
-              around the world.
-            </p>
-          </div>
-
-          <div
-            id="experiences"
-            className="rounded-2xl border border-white/10 bg-white/5 p-8"
-          >
-            <h3 className="mb-4 text-2xl font-semibold">AI Trip Planner</h3>
-
-            <p className="leading-7 text-slate-300">
-              Tell us your dream trip and let Unseen AI build the perfect
-              itinerary for you.
-            </p>
-          </div>
-        </div>
-      </section>
+      <Services />
 
       <section
         id="about"
@@ -91,7 +33,9 @@ export default function Home() {
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-7">
             <p className="mb-6 text-sm font-semibold text-[#D4AF37]">01</p>
+
             <h3 className="mb-3 text-xl font-semibold">Luxury service</h3>
+
             <p className="leading-7 text-slate-400">
               Travel in comfort with professional drivers and carefully selected
               vehicles.
@@ -100,9 +44,11 @@ export default function Home() {
 
           <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-7">
             <p className="mb-6 text-sm font-semibold text-[#D4AF37]">02</p>
+
             <h3 className="mb-3 text-xl font-semibold">
               Tailor-made journeys
             </h3>
+
             <p className="leading-7 text-slate-400">
               Every tour and travel experience is thoughtfully designed around
               you.
@@ -111,7 +57,9 @@ export default function Home() {
 
           <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-7">
             <p className="mb-6 text-sm font-semibold text-[#D4AF37]">03</p>
+
             <h3 className="mb-3 text-xl font-semibold">Local expertise</h3>
+
             <p className="leading-7 text-slate-400">
               Discover remarkable places, stories and experiences most visitors
               never see.
@@ -120,7 +68,9 @@ export default function Home() {
 
           <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-7">
             <p className="mb-6 text-sm font-semibold text-[#D4AF37]">04</p>
+
             <h3 className="mb-3 text-xl font-semibold">Trusted worldwide</h3>
+
             <p className="leading-7 text-slate-400">
               Travel confidently through carefully selected local partners
               around the world.
