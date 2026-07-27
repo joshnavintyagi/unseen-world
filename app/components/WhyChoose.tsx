@@ -1,0 +1,77 @@
+export default function WhyChoose() {
+  return (
+    <section
+      id="about"
+      className="mx-auto max-w-[1400px] px-6 py-20 md:px-12"
+    >
+      <div className="mb-12 max-w-2xl">
+        <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-[#D4AF37]">
+          The Unseen World difference
+        </p>
+
+        <h2 className="text-4xl font-semibold md:text-5xl">
+          Why choose Unseen World?
+        </h2>
+
+        <p className="mt-5 text-lg leading-8 text-slate-300">
+          Personal service, local knowledge and carefully designed journeys
+          from your first enquiry to your final destination.
+        </p>
+      </div>
+
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-7">
+          <p className="mb-6 text-sm font-semibold text-[#D4AF37]">01</p>
+
+          <h3 className="mb-3 text-xl font-semibold">
+            Luxury service
+          </h3>
+
+          <p className="leading-7 text-slate-400">
+            Travel in comfort with professional drivers and carefully selected
+            vehicles.
+          </p>
+        </div>
+
+        <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-7">
+          <p className="mb-6 text-sm font-semibold text-[#D4AF37]">02</p>
+
+          <h3 className="mb-3 text-xl font-semibold">
+            Tailor-made journeys
+          </h3>
+
+          <p className="leading-7 text-slate-400">
+            Every tour and travel experience is thoughtfully designed around
+            you.
+          </p>
+        </div>
+
+        <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-7">
+          <p className="mb-6 text-sm font-semibold text-[#D4AF37]">03</p>
+
+          <h3 className="mb-3 text-xl font-semibold">
+            Local expertise
+          </h3>
+
+          <p className="leading-7 text-slate-400">
+            Discover remarkable places, stories and experiences most visitors
+            never see.
+          </p>
+        </div>
+
+        <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-7">
+          <p className="mb-6 text-sm font-semibold text-[#D4AF37]">04</p>
+
+          <h3 className="mb-3 text-xl font-semibold">
+            Trusted worldwide
+          </h3>
+
+          <p className="leading-7 text-slate-400">
+            Travel confidently through carefully selected local partners
+            around the world.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
