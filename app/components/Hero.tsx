@@ -22,13 +22,13 @@ export default function Hero() {
         <div className="mt-8 flex flex-wrap gap-4">
           <a
             href="#booking"
-            className="rounded-lg bg-[#D4AF37] px-6 py-3 font-semibold text-[#081220]"
+            className="rounded-lg bg-[#D4AF37] px-6 py-3 font-semibold text-[#081220] transition hover:bg-[#e5c653]"
           >
             Plan My Journey
           </a>
 
           <a
-            href="#experiences"
+            href="#destinations"
             className="rounded-lg border border-white/40 px-6 py-3 font-semibold transition hover:bg-white hover:text-[#081220]"
           >
             Explore Scotland
@@ -43,7 +43,8 @@ export default function Hero() {
           className="h-full w-full object-cover"
         />
 
-        <div className="absolute inset-0 bg-gradient-to-r from-[#081220]/45 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#081220]/35 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#081220]/20 via-transparent to-transparent" />
       </div>
     </section>
   );

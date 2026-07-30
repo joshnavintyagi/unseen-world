@@ -1,7 +1,9 @@
 import BookingSearch from "./components/BookingSearch";
+import Destinations from "./components/Destinations";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Services from "./components/Services";
+import Testimonials from "./components/Testimonials";
 import WhyChoose from "./components/WhyChoose";
 
 export default function Home() {
@@ -11,6 +13,8 @@ export default function Home() {
       <Hero />
       <BookingSearch />
       <Services />
+      <Destinations />
+      <Testimonials />
       <WhyChoose />
     </main>
   );
