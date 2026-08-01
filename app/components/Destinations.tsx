@@ -66,9 +66,7 @@ function DestinationCard({
   const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
-    if (!isHovered) {
-      return;
-    }
+    if (!isHovered) return;
 
     const timer = window.setInterval(() => {
       setActiveImage(
@@ -84,7 +82,7 @@ function DestinationCard({
     <article
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="group relative min-h-[570px] overflow-hidden rounded-[32px] border border-white/15 bg-slate-900 shadow-2xl transition duration-500 hover:-translate-y-2 hover:border-[#D4AF37]/70"
+      className="group relative min-h-[500px] overflow-hidden rounded-[28px] border border-white/15 bg-slate-900 shadow-2xl transition duration-500 hover:-translate-y-1.5 hover:border-[#D4AF37]/70"
     >
       {destination.images.map((image, index) => (
         <img
@@ -92,7 +90,7 @@ function DestinationCard({
           src={image}
           alt={`${destination.name} private travel experience ${index + 1}`}
           style={{ objectPosition: destination.imagePosition }}
-          className={`absolute inset-0 h-full w-full object-cover contrast-[1.05] saturate-[1.12] transition-all duration-[900ms] ease-in-out group-hover:scale-[1.06] group-hover:saturate-[1.22] ${
+          className={`absolute inset-0 h-full w-full object-cover contrast-[1.05] saturate-[1.12] transition-all duration-[900ms] ease-in-out group-hover:scale-[1.05] group-hover:saturate-[1.22] ${
             activeImage === index ? "opacity-100" : "opacity-0"
           }`}
         />
@@ -101,13 +99,13 @@ function DestinationCard({
       <div className="absolute inset-0 bg-gradient-to-b from-black/5 via-transparent to-[#020914]/95" />
       <div className="absolute inset-0 bg-gradient-to-t from-[#020914]/80 via-transparent to-transparent" />
 
-      <div className="absolute left-6 top-6 z-20">
-        <span className="rounded-full border border-white/25 bg-[#081220]/60 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-white backdrop-blur-md">
+      <div className="absolute left-5 top-5 z-20">
+        <span className="rounded-full border border-white/25 bg-[#081220]/60 px-3.5 py-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-white backdrop-blur-md">
           {destination.badge}
         </span>
       </div>
 
-      <div className="absolute right-4 top-4 z-20 flex items-center gap-2 rounded-full border border-white/15 bg-[#081220]/35 px-3 py-2 backdrop-blur-md">
+      <div className="absolute right-5 top-5 z-20 flex items-center gap-2 rounded-full border border-white/15 bg-[#081220]/35 px-3 py-2 backdrop-blur-md">
         {destination.images.map((_, index) => (
           <button
             key={index}
@@ -116,34 +114,34 @@ function DestinationCard({
             aria-label={`Show image ${index + 1} of ${destination.name}`}
             className={`cursor-pointer rounded-full transition-all duration-300 ${
               activeImage === index
-                ? "h-2.5 w-7 bg-[#D4AF37]"
-                : "h-2.5 w-2.5 bg-white/60 hover:bg-white"
+                ? "h-2 w-6 bg-[#D4AF37]"
+                : "h-2 w-2 bg-white/60 hover:bg-white"
             }`}
           />
         ))}
       </div>
 
-      <div className="absolute inset-x-0 bottom-0 z-10 p-7 md:p-8">
-        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-[#E7C84B]">
+      <div className="absolute inset-x-0 bottom-0 z-10 p-6">
+        <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.25em] text-[#E7C84B]">
           {destination.location}
         </p>
 
-        <h3 className="text-3xl font-semibold leading-tight text-white md:text-4xl">
+        <h3 className="text-3xl font-semibold leading-tight text-white">
           {destination.name}
         </h3>
 
-        <p className="mt-4 min-h-[84px] text-base leading-7 text-slate-200">
+        <p className="mt-3 min-h-[72px] text-sm leading-6 text-slate-200">
           {destination.description}
         </p>
 
-        <div className="mt-6 border-t border-white/20 pt-5">
-          <p className="mb-5 text-sm font-medium text-slate-300">
+        <div className="mt-5 border-t border-white/20 pt-4">
+          <p className="mb-4 text-xs font-medium text-slate-300">
             {destination.duration}
           </p>
 
           <a
             href="#booking"
-            className="inline-flex items-center gap-3 rounded-full bg-[#D4AF37] px-6 py-3 text-sm font-semibold text-[#081220] transition duration-300 hover:scale-105 hover:bg-[#E7C84B]"
+            className="inline-flex items-center gap-2 rounded-full bg-[#D4AF37] px-5 py-2.5 text-sm font-semibold text-[#081220] transition duration-300 hover:scale-105 hover:bg-[#E7C84B]"
           >
             Explore tour
             <span aria-hidden="true">→</span>
@@ -151,7 +149,7 @@ function DestinationCard({
         </div>
       </div>
 
-      <div className="pointer-events-none absolute inset-0 rounded-[32px] ring-1 ring-inset ring-white/10" />
+      <div className="pointer-events-none absolute inset-0 rounded-[28px] ring-1 ring-inset ring-white/10" />
     </article>
   );
 }
@@ -160,24 +158,24 @@ export default function Destinations() {
   return (
     <section
       id="destinations"
-      className="mx-auto max-w-[1400px] px-6 py-24 md:px-12"
+      className="mx-auto max-w-6xl px-6 py-14"
     >
-      <div className="mb-14 max-w-3xl">
-        <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-[#D4AF37]">
+      <div className="mb-9 max-w-2xl">
+        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.3em] text-[#D4AF37]">
           Signature destinations
         </p>
 
-        <h2 className="text-4xl font-semibold leading-tight md:text-6xl">
+        <h2 className="text-3xl font-semibold leading-tight md:text-4xl">
           Journeys that stay with you forever.
         </h2>
 
-        <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300">
+        <p className="mt-4 max-w-xl text-base leading-7 text-slate-300">
           Private journeys through Britain&apos;s most inspiring landscapes,
           historic cities and unforgettable places.
         </p>
       </div>
 
-      <div className="grid gap-7 lg:grid-cols-3">
+      <div className="grid gap-5 lg:grid-cols-3">
         {destinations.map((destination) => (
           <DestinationCard
             key={destination.name}
@@ -186,7 +184,7 @@ export default function Destinations() {
         ))}
       </div>
 
-      <div className="mt-10 flex flex-wrap items-center justify-center gap-x-10 gap-y-4 border-y border-white/10 py-6 text-sm text-slate-400">
+      <div className="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 border-y border-white/10 py-5 text-xs text-slate-400">
         <span>Private chauffeur service</span>
         <span className="hidden text-[#D4AF37] sm:inline">◆</span>
         <span>Tailor-made itineraries</span>
