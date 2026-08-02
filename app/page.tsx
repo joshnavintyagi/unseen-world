@@ -1,11 +1,13 @@
 import BookingSearch from "./components/BookingSearch";
 import Destinations from "./components/Destinations";
+import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
-import StorySection from "./components/StorySection";
 import Services from "./components/Services";
+import StorySection from "./components/StorySection";
 import Testimonials from "./components/Testimonials";
 import WhyChoose from "./components/WhyChoose";
+import FinalCTA from "./components/FinalCTA";
 
 export default function Home() {
   return (
@@ -17,7 +19,9 @@ export default function Home() {
       <Destinations />
       <StorySection />
       <Testimonials />
-      <WhyChoose />
+<WhyChoose />
+<FinalCTA />
+<Footer />
     </main>
   );
 }
