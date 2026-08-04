@@ -11,7 +11,7 @@ import FinalCTA from "./components/FinalCTA";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#081220] text-white">
+    <main className="min-h-screen overflow-x-hidden bg-[#081220] text-white">
       <Header />
       <Hero />
       <BookingSearch />
@@ -19,9 +19,9 @@ export default function Home() {
       <Destinations />
       <StorySection />
       <Testimonials />
-<WhyChoose />
-<FinalCTA />
-<Footer />
+      <WhyChoose />
+      <FinalCTA />
+      <Footer />
     </main>
   );
 }

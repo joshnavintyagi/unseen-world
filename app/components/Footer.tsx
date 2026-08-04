@@ -3,7 +3,8 @@ export default function Footer() {
     <footer className="border-t border-white/10 bg-[#06101c]">
       <div className="mx-auto max-w-[1400px] px-6 py-14 md:px-12">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
-          {/* Brand */}
+
+          {/* BRAND */}
           <div>
             <div className="flex items-center gap-3">
               <div className="flex flex-col items-center">
@@ -18,7 +19,7 @@ export default function Footer() {
 
               <img
                 src="/images/unseen-logo.png"
-                alt=""
+                alt="Unseen World"
                 className="h-[86px] w-[86px] object-contain"
               />
             </div>
@@ -29,7 +30,7 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Explore */}
+          {/* EXPLORE */}
           <div>
             <h3 className="mb-5 text-sm font-semibold uppercase tracking-[0.2em] text-[#D4AF37]">
               Explore
@@ -66,7 +67,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Company */}
+          {/* COMPANY */}
           <div>
             <h3 className="mb-5 text-sm font-semibold uppercase tracking-[0.2em] text-[#D4AF37]">
               Company
@@ -95,15 +96,17 @@ export default function Footer() {
               </a>
 
               <a
-                href="#"
+                href="https://www.facebook.com/unseenworldtours/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="block transition hover:text-[#D4AF37]"
               >
-                Contact
+                Facebook
               </a>
             </div>
           </div>
 
-          {/* Contact */}
+          {/* CONTACT */}
           <div>
             <h3 className="mb-5 text-sm font-semibold uppercase tracking-[0.2em] text-[#D4AF37]">
               Contact
@@ -111,25 +114,44 @@ export default function Footer() {
 
             <div className="space-y-3 text-sm text-slate-300">
               <p>Scotland, United Kingdom</p>
-              <p>Private journeys by appointment</p>
 
               <a
-                href="mailto:hello@unseenworld.uk"
+                href="mailto:unseenworldtravel@gmail.com"
+                className="block break-all transition hover:text-[#D4AF37]"
+              >
+                unseenworldtravel@gmail.com
+              </a>
+
+              <a
+                href="tel:+447856585000"
                 className="block transition hover:text-[#D4AF37]"
               >
-                hello@unseenworld.uk
+                +44 7856 585000
               </a>
             </div>
 
-            <a
-              href="#booking"
-              className="mt-6 inline-flex rounded-xl bg-[#D4AF37] px-5 py-3 text-sm font-semibold text-[#081220] transition hover:bg-[#E7C84B]"
-            >
-              Start Your Journey
-            </a>
+            {/* CONTACT BUTTONS */}
+            <div className="mt-6 flex flex-wrap gap-3">
+              <a
+                href="https://wa.me/447856585000?text=Hello%20Unseen%20World%2C%20I%27d%20like%20to%20discuss%20a%20journey."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-xl bg-[#D4AF37] px-5 py-3 text-sm font-semibold text-[#081220] transition hover:bg-[#E7C84B]"
+              >
+                WhatsApp Us
+              </a>
+
+              <a
+                href="tel:+447856585000"
+                className="rounded-xl border border-white/20 px-5 py-3 text-sm font-semibold text-white transition hover:border-[#D4AF37] hover:text-[#D4AF37]"
+              >
+                Call Us
+              </a>
+            </div>
           </div>
         </div>
 
+        {/* BOTTOM */}
         <div className="mt-12 flex flex-col gap-4 border-t border-white/10 pt-6 text-xs text-slate-500 md:flex-row md:items-center md:justify-between">
           <p>
             © {new Date().getFullYear()} Unseen World. All rights reserved.
