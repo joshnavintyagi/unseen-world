@@ -1,98 +1,86 @@
 export default function Footer() {
   return (
-    <footer className="border-t border-white/10 bg-[#06101c]">
-      <div className="mx-auto max-w-[1400px] px-6 py-14 md:px-12">
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+    <footer
+      id="contact"
+      className="border-t border-white/10 bg-[#050d16] px-5 pb-6 pt-10 sm:px-8 lg:px-12"
+    >
+      <div className="mx-auto max-w-[1280px]">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.5fr_0.8fr_0.8fr_1fr]">
 
           {/* BRAND */}
           <div>
-            <div className="flex items-center gap-3">
-              <div className="flex flex-col items-center">
-                <p className="text-xl font-medium tracking-[0.34em] text-white">
+            <a href="#" className="inline-flex items-center">
+              <div className="flex flex-col">
+                <span className="text-[18px] font-medium tracking-[0.32em] text-white">
                   UNSEEN
-                </p>
+                </span>
 
-                <p className="mt-1 text-sm font-semibold tracking-[0.4em] text-[#D4AF37]">
+                <span className="mt-1 text-[10px] font-semibold tracking-[0.42em] text-[#D4AF37]">
                   WORLD
-                </p>
+                </span>
               </div>
 
-              <img
-                src="/images/unseen-logo.png"
-                alt="Unseen World"
-                className="h-[86px] w-[86px] object-contain"
-              />
-            </div>
+              <div className="-ml-1 flex h-[66px] w-[66px] items-center justify-center">
+                <img
+                  src="/images/unseen-logo.png"
+                  alt="Unseen World"
+                  className="h-[105px] w-[105px] max-w-none object-contain"
+                />
+              </div>
+            </a>
 
-            <p className="mt-5 max-w-sm text-sm leading-6 text-slate-400">
-              Private transfers, tailor-made tours, worldwide holidays and
-              intelligent travel planning — designed around you.
+            <p className="mt-3 max-w-[300px] text-[12px] leading-5 text-slate-400">
+              Luxury airport transfers, chauffeur services, private tours
+              and worldwide travel — beautifully arranged around you.
+            </p>
+
+            <p className="mt-4 text-[10px] uppercase tracking-[0.18em] text-[#D4AF37]">
+              Private Travel · Beautifully Simple
             </p>
           </div>
 
-          {/* EXPLORE */}
+          {/* SERVICES */}
           <div>
-            <h3 className="mb-5 text-sm font-semibold uppercase tracking-[0.2em] text-[#D4AF37]">
-              Explore
+            <h3 className="mb-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#D4AF37]">
+              Services
             </h3>
 
-            <div className="space-y-3 text-sm text-slate-300">
-              <a
-                href="#transfers"
-                className="block transition hover:text-[#D4AF37]"
-              >
+            <div className="space-y-2.5 text-[12px] text-slate-300">
+              <a href="#transfers" className="block transition hover:text-[#D4AF37]">
                 Airport Transfers
               </a>
 
-              <a
-                href="#tours"
-                className="block transition hover:text-[#D4AF37]"
-              >
-                Private Tours
+              <a href="#tours" className="block transition hover:text-[#D4AF37]">
+                Chauffeur Services
               </a>
 
-              <a
-                href="#experiences"
-                className="block transition hover:text-[#D4AF37]"
-              >
-                Experiences
+              <a href="#experiences" className="block transition hover:text-[#D4AF37]">
+                Tours & Experiences
               </a>
 
-              <a
-                href="#holidays"
-                className="block transition hover:text-[#D4AF37]"
-              >
-                Worldwide Holidays
+              <a href="#holidays" className="block transition hover:text-[#D4AF37]">
+                Worldwide Travel
               </a>
             </div>
           </div>
 
           {/* COMPANY */}
           <div>
-            <h3 className="mb-5 text-sm font-semibold uppercase tracking-[0.2em] text-[#D4AF37]">
+            <h3 className="mb-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#D4AF37]">
               Company
             </h3>
 
-            <div className="space-y-3 text-sm text-slate-300">
-              <a
-                href="#about"
-                className="block transition hover:text-[#D4AF37]"
-              >
-                About Unseen World
+            <div className="space-y-2.5 text-[12px] text-slate-300">
+              <a href="#about" className="block transition hover:text-[#D4AF37]">
+                About Us
               </a>
 
-              <a
-                href="#reviews"
-                className="block transition hover:text-[#D4AF37]"
-              >
-                Guest Reviews
+              <a href="#reviews" className="block transition hover:text-[#D4AF37]">
+                Reviews
               </a>
 
-              <a
-                href="#booking"
-                className="block transition hover:text-[#D4AF37]"
-              >
-                Plan My Journey
+              <a href="#booking" className="block transition hover:text-[#D4AF37]">
+                Book a Journey
               </a>
 
               <a
@@ -108,11 +96,11 @@ export default function Footer() {
 
           {/* CONTACT */}
           <div>
-            <h3 className="mb-5 text-sm font-semibold uppercase tracking-[0.2em] text-[#D4AF37]">
+            <h3 className="mb-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#D4AF37]">
               Contact
             </h3>
 
-            <div className="space-y-3 text-sm text-slate-300">
+            <div className="space-y-2.5 text-[12px] text-slate-300">
               <p>Scotland, United Kingdom</p>
 
               <a
@@ -130,20 +118,19 @@ export default function Footer() {
               </a>
             </div>
 
-            {/* CONTACT BUTTONS */}
-            <div className="mt-6 flex flex-wrap gap-3">
+            <div className="mt-5 flex flex-wrap gap-2">
               <a
                 href="https://wa.me/447856585000?text=Hello%20Unseen%20World%2C%20I%27d%20like%20to%20discuss%20a%20journey."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-xl bg-[#D4AF37] px-5 py-3 text-sm font-semibold text-[#081220] transition hover:bg-[#E7C84B]"
+                className="inline-flex min-h-[40px] items-center justify-center rounded-lg bg-[#D4AF37] px-4 text-[12px] font-semibold text-[#06111d] transition hover:bg-[#E7C84B]"
               >
-                WhatsApp Us
+                WhatsApp
               </a>
 
               <a
                 href="tel:+447856585000"
-                className="rounded-xl border border-white/20 px-5 py-3 text-sm font-semibold text-white transition hover:border-[#D4AF37] hover:text-[#D4AF37]"
+                className="inline-flex min-h-[40px] items-center justify-center rounded-lg border border-white/20 px-4 text-[12px] font-semibold text-white transition hover:border-[#D4AF37] hover:text-[#D4AF37]"
               >
                 Call Us
               </a>
@@ -152,12 +139,12 @@ export default function Footer() {
         </div>
 
         {/* BOTTOM */}
-        <div className="mt-12 flex flex-col gap-4 border-t border-white/10 pt-6 text-xs text-slate-500 md:flex-row md:items-center md:justify-between">
+        <div className="mt-9 flex flex-col gap-4 border-t border-white/10 pt-5 text-[10px] text-slate-500 sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {new Date().getFullYear()} Unseen World. All rights reserved.
           </p>
 
-          <div className="flex flex-wrap gap-5">
+          <div className="flex flex-wrap gap-x-5 gap-y-2">
             <a href="#" className="transition hover:text-white">
               Privacy Policy
             </a>

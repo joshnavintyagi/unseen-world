@@ -6,9 +6,11 @@ import {
   useRef,
   useState,
 } from "react";
+import VehicleSelection from "./VehicleSelection";
 
 type JourneyDetails = {
   service: string;
+  vehicle: string;
   pickup: string;
   destination: string;
   travelDate: string;
@@ -32,11 +34,20 @@ type JourneyDetails = {
   message: string;
 };
 
+type PlaceSuggestion = {
+  id: string;
+  label: string;
+};
+
+type LocationField = "pickup" | "destination";
+
+
 export default function BookingSearch() {
   const [showDetails, setShowDetails] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [travelDate, setTravelDate] = useState("");
   const [service, setService] = useState("Airport Transfer");
+  const [selectedVehicle, setSelectedVehicle] = useState("");
   const [travellerCount, setTravellerCount] = useState(1);
   const [showTravellerNames, setShowTravellerNames] = useState(false);
   const [ticketedTravel, setTicketedTravel] = useState("none");
@@ -64,6 +75,16 @@ export default function BookingSearch() {
   const dateRef = useRef<HTMLInputElement>(null);
   const bookingRef = useRef<HTMLElement>(null);
   const detailsRef = useRef<HTMLDivElement>(null);
+  const [pickup, setPickup] = useState("");
+  const [destination, setDestination] = useState("");
+  const [placeSuggestions, setPlaceSuggestions] = useState<
+    Record<LocationField, PlaceSuggestion[]>
+  >({ pickup: [], destination: [] });
+  const [activeLocationField, setActiveLocationField] =
+    useState<LocationField | null>(null);
+  const [isSearchingPlaces, setIsSearchingPlaces] = useState(false);
+  const placeRequestRef = useRef<AbortController | null>(null);
+  const placeSearchTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const now = new Date();
 
@@ -98,7 +119,8 @@ export default function BookingSearch() {
     return hoursUntilJourney <= 48;
   }
 
-  const shortNotice = isShortNotice(travelDate);
+  const priorityEligible = service !== "Airport Transfer";
+  const shortNotice = priorityEligible && isShortNotice(travelDate);
 
   function formatTravelDate(dateString: string) {
     if (!dateString) return "";
@@ -153,15 +175,126 @@ export default function BookingSearch() {
     }, 100);
   }
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    if (!showDetails) {
-      setShowDetails(true);
-      setSubmitError("");
-      scrollToDetails();
+  function clearPlaceSuggestions(field?: LocationField) {
+    if (field) {
+      setPlaceSuggestions((current) => ({ ...current, [field]: [] }));
       return;
     }
+
+    setPlaceSuggestions({ pickup: [], destination: [] });
+    setActiveLocationField(null);
+  }
+
+  function searchPlaces(field: LocationField, query: string) {
+    if (placeSearchTimerRef.current) {
+      clearTimeout(placeSearchTimerRef.current);
+    }
+
+    placeRequestRef.current?.abort();
+
+    if (query.trim().length < 2) {
+      clearPlaceSuggestions(field);
+      setIsSearchingPlaces(false);
+      return;
+    }
+
+    setActiveLocationField(field);
+    setIsSearchingPlaces(true);
+
+    placeSearchTimerRef.current = setTimeout(async () => {
+      const controller = new AbortController();
+      placeRequestRef.current = controller;
+
+      try {
+        const response = await fetch(
+          `/api/places?q=${encodeURIComponent(query.trim())}`,
+          { signal: controller.signal }
+        );
+
+        if (!response.ok) {
+          throw new Error("Location search failed");
+        }
+
+        const result = (await response.json()) as {
+          suggestions?: PlaceSuggestion[];
+        };
+
+        setPlaceSuggestions((current) => ({
+          ...current,
+          [field]: result.suggestions ?? [],
+        }));
+      } catch (error) {
+        if ((error as Error).name !== "AbortError") {
+          setPlaceSuggestions((current) => ({ ...current, [field]: [] }));
+        }
+      } finally {
+        if (!controller.signal.aborted) {
+          setIsSearchingPlaces(false);
+        }
+      }
+    }, 220);
+  }
+
+  function choosePlace(field: LocationField, suggestion: PlaceSuggestion) {
+    if (field === "pickup") {
+      setPickup(suggestion.label);
+    } else {
+      setDestination(suggestion.label);
+    }
+
+    clearPlaceSuggestions(field);
+    setActiveLocationField(null);
+  }
+
+  function locationSuggestions(field: LocationField) {
+    const suggestions = placeSuggestions[field];
+
+    if (activeLocationField !== field) return null;
+
+    return (
+      <div className="absolute left-0 right-0 top-[74px] z-[70] overflow-hidden rounded-xl border border-[#D4AF37]/30 bg-[#081220] shadow-2xl">
+        {isSearchingPlaces && suggestions.length === 0 ? (
+          <div className="px-4 py-3 text-xs text-slate-400">
+            Finding locations…
+          </div>
+        ) : suggestions.length > 0 ? (
+          <div className="max-h-72 overflow-y-auto py-1">
+            {suggestions.map((suggestion) => (
+              <button
+                key={suggestion.id}
+                type="button"
+                onMouseDown={(event) => event.preventDefault()}
+                onClick={() => choosePlace(field, suggestion)}
+                className="flex w-full items-start gap-3 border-b border-white/[0.06] px-4 py-3 text-left text-sm text-slate-200 transition last:border-b-0 hover:bg-white/[0.07] hover:text-white"
+              >
+                <span className="mt-0.5 shrink-0 text-[#D4AF37]">●</span>
+                <span className="leading-5">{suggestion.label}</span>
+              </button>
+            ))}
+          </div>
+        ) : (
+          <div className="px-4 py-3 text-xs text-slate-500">
+            Keep typing an address, airport, hotel or place.
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  event.preventDefault();
+
+  if (!showDetails) {
+    if (isAirportTransfer && !selectedVehicle) {
+      setSubmitError("Please select your preferred vehicle.");
+      return;
+    }
+
+    setShowDetails(true);
+    setSubmitError("");
+    scrollToDetails();
+    return;
+  }
 
     if (isSending) return;
 
@@ -186,6 +319,7 @@ export default function BookingSearch() {
 
     const journey: JourneyDetails = {
       service: String(formData.get("service") || ""),
+      vehicle: selectedVehicle,
       pickup: String(formData.get("pickup") || ""),
       destination: String(formData.get("destination") || ""),
       travelDate: String(formData.get("travelDate") || ""),
@@ -248,18 +382,25 @@ export default function BookingSearch() {
     }
   }
 
+  function submittedJourneyIsPriority(journey: JourneyDetails) {
+    return journey.service !== "Airport Transfer" && isShortNotice(journey.travelDate);
+  }
+
   function buildWhatsAppMessage(journey: JourneyDetails) {
     const lines = [
       "Hello Unseen World,",
       "",
-      "I have submitted a short-notice journey request and would like to check availability.",
+      submittedJourneyIsPriority(journey)
+        ? "I have submitted a priority journey request and would like to check availability."
+        : "I have submitted a journey request and would like to check availability.",
       "",
       `Service: ${journey.service}`,
-      `Travel date: ${formatTravelDate(journey.travelDate)}`,
-      ...(journey.pickupTime ? [`Pickup / arrival time: ${journey.pickupTime}`] : []),
-      `Pick-up: ${journey.pickup}`,
-      `Destination: ${journey.destination}`,
-      `Travellers: ${journey.travellers}`,
+...(journey.vehicle ? [`Vehicle: ${journey.vehicle}`] : []),
+`Travel date: ${formatTravelDate(journey.travelDate)}`,
+...(journey.pickupTime ? [`Pickup / arrival time: ${journey.pickupTime}`] : []),
+`Pick-up: ${journey.pickup}`,
+`Destination: ${journey.destination}`,
+`Travellers: ${journey.travellers}`,
       "",
       `Name: ${journey.name}`,
     ];
@@ -325,8 +466,12 @@ export default function BookingSearch() {
     setSubmitted(false);
     setShowDetails(false);
     setTravelDate("");
+    setPickup("");
+    setDestination("");
+    clearPlaceSuggestions();
     setService("Airport Transfer");
-    setTravellerCount(1);
+setSelectedVehicle("");
+setTravellerCount(1);
     setShowTravellerNames(false);
     setTicketedTravel("none");
     setSubmittedJourney(null);
@@ -349,15 +494,54 @@ export default function BookingSearch() {
       scrollToBooking();
     }
   }, [submitted]);
+useEffect(() => {
+  function handleServiceSelection(event: Event) {
+    const selectedService = (event as CustomEvent<string>).detail;
 
+    const validServices = [
+      "Airport Transfer",
+      "Private Tour",
+      "Worldwide Holiday",
+      "Custom Journey",
+    ];
+
+    if (!validServices.includes(selectedService)) return;
+
+    setService(selectedService);
+setSelectedVehicle("");
+setShowDetails(false);
+setSubmitted(false);
+setSubmittedJourney(null);
+setSubmitError("");
+
+    if (
+      selectedService !== "Worldwide Holiday" &&
+      selectedService !== "Custom Journey"
+    ) {
+      setTicketedTravel("none");
+    }
+  }
+
+  window.addEventListener(
+    "select-booking-service",
+    handleServiceSelection
+  );
+
+  return () => {
+    window.removeEventListener(
+      "select-booking-service",
+      handleServiceSelection
+    );
+  };
+}, []);
   /*
    * SUBMITTED / CONFIRMATION SCREEN
    */
 
   if (submitted && submittedJourney) {
-    const submittedIsPriority = isShortNotice(
-      submittedJourney.travelDate
-    );
+    const submittedIsPriority =
+      submittedJourney.service !== "Airport Transfer" &&
+      isShortNotice(submittedJourney.travelDate);
 
     const whatsappMessage =
       buildWhatsAppMessage(submittedJourney);
@@ -831,7 +1015,7 @@ export default function BookingSearch() {
             Start your journey
           </p>
 
-          <h2 className="text-3xl font-semibold md:text-4xl">
+          <h2 className="text-3xl font-semibold text-white md:text-4xl">
             Where would you like to go?
           </h2>
 
@@ -876,7 +1060,7 @@ export default function BookingSearch() {
               </select>
             </label>
 
-            <label className="block">
+            <label className="relative block">
               <span className="mb-2 block text-xs font-medium text-slate-300">
                 Pick-up location
               </span>
@@ -885,12 +1069,30 @@ export default function BookingSearch() {
                 name="pickup"
                 required
                 type="text"
-                placeholder="Airport, hotel or address"
+                value={pickup}
+                autoComplete="off"
+                placeholder="Start typing an address or airport"
+                onFocus={() => {
+                  setActiveLocationField("pickup");
+                  if (pickup.trim().length >= 2) searchPlaces("pickup", pickup);
+                }}
+                onChange={(event) => {
+                  const value = event.target.value;
+                  setPickup(value);
+                  searchPlaces("pickup", value);
+                }}
+                onBlur={() =>
+                  window.setTimeout(() => {
+                    clearPlaceSuggestions("pickup");
+                    setActiveLocationField(null);
+                  }, 160)
+                }
                 className="h-12 w-full rounded-xl border border-white/10 bg-slate-950 px-3 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-[#D4AF37]"
               />
+              {locationSuggestions("pickup")}
             </label>
 
-            <label className="block">
+            <label className="relative block">
               <span className="mb-2 block text-xs font-medium text-slate-300">
                 Destination
               </span>
@@ -899,9 +1101,29 @@ export default function BookingSearch() {
                 name="destination"
                 required
                 type="text"
-                placeholder="Where are you going?"
+                value={destination}
+                autoComplete="off"
+                placeholder="Start typing your destination"
+                onFocus={() => {
+                  setActiveLocationField("destination");
+                  if (destination.trim().length >= 2) {
+                    searchPlaces("destination", destination);
+                  }
+                }}
+                onChange={(event) => {
+                  const value = event.target.value;
+                  setDestination(value);
+                  searchPlaces("destination", value);
+                }}
+                onBlur={() =>
+                  window.setTimeout(() => {
+                    clearPlaceSuggestions("destination");
+                    setActiveLocationField(null);
+                  }, 160)
+                }
                 className="h-12 w-full rounded-xl border border-white/10 bg-slate-950 px-3 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-[#D4AF37]"
               />
+              {locationSuggestions("destination")}
             </label>
 
             <label className="block">
@@ -1276,7 +1498,24 @@ export default function BookingSearch() {
               </div>
             </div>
           )}
+{isAirportTransfer && (
+  <VehicleSelection
+    selectedVehicle={selectedVehicle}
+    onSelectVehicle={(vehicle) => {
+      setSelectedVehicle(vehicle);
+      setSubmitError("");
+    }}
+  />
+)}
 
+{!showDetails && submitError && (
+  <p
+    role="alert"
+    className="mt-3 rounded-xl border border-red-400/25 bg-red-400/[0.06] px-4 py-3 text-sm text-red-200"
+  >
+    {submitError}
+  </p>
+)}
           {!showDetails && (
             <div className="mt-5 flex justify-end">
               <button

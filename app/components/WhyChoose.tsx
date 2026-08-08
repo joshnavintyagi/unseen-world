@@ -1,27 +1,39 @@
 const reasons = [
   {
-    number: "01",
-    title: "Luxury service",
+    icon: "♙",
+    title: "Executive Chauffeurs",
     description:
-      "Travel in comfort with professional drivers and carefully selected vehicles.",
+      "Experienced, licensed and dedicated to your comfort and safety.",
   },
   {
-    number: "02",
-    title: "Tailor-made journeys",
+    icon: "✈",
+    title: "Flight Monitoring",
     description:
-      "Every tour and travel experience is thoughtfully designed around you.",
+      "We monitor your flight in real time for a seamless airport experience.",
   },
   {
-    number: "03",
-    title: "Local expertise",
+    icon: "♧",
+    title: "Meet & Greet",
     description:
-      "Discover remarkable places, stories and experiences most visitors never see.",
+      "Your chauffeur will be waiting for you, ready to assist.",
   },
   {
-    number: "04",
-    title: "Trusted worldwide",
+    icon: "◇",
+    title: "Luxury Fleet",
     description:
-      "Travel confidently through carefully selected local partners around the world.",
+      "A carefully selected fleet for a smooth and stylish journey.",
+  },
+  {
+    icon: "◎",
+    title: "Worldwide Coverage",
+    description:
+      "Private travel services in cities and destinations around the world.",
+  },
+  {
+    icon: "◴",
+    title: "Available 24/7",
+    description:
+      "We're here to help, anytime, day or night, every day.",
   },
 ];
 
@@ -29,62 +41,41 @@ export default function WhyChoose() {
   return (
     <section
       id="about"
-      className="mx-auto max-w-[1400px] px-6 py-24 md:px-12"
+      className="bg-[#06111d] px-5 pb-10 pt-7 sm:px-8 lg:px-12"
     >
-      <div className="grid gap-12 lg:grid-cols-[0.75fr_1.25fr] lg:gap-16">
-        {/* Heading */}
-        <div className="max-w-xl">
-          <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-[#D4AF37]">
-            The Unseen World Difference
+      <div className="mx-auto max-w-[1280px]">
+
+        <div className="mb-8 text-center">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#D4AF37]">
+            Why Choose Unseen World
           </p>
-
-          <h2 className="text-4xl font-semibold leading-tight md:text-5xl">
-            Why choose
-            <br />
-            Unseen World?
-          </h2>
-
-          <p className="mt-6 text-lg leading-8 text-slate-300">
-            Personal service, local knowledge and carefully designed journeys
-            from your first enquiry to your final destination.
-          </p>
-
-          <a
-            href="#booking"
-            className="mt-8 inline-flex items-center gap-3 rounded-full border border-white/20 px-6 py-3 font-semibold text-white transition duration-300 hover:border-[#D4AF37] hover:bg-[#D4AF37] hover:text-[#081220]"
-          >
-            Start your journey
-            <span aria-hidden="true">→</span>
-          </a>
         </div>
 
-        {/* Reasons */}
-        <div className="grid gap-5 sm:grid-cols-2">
-          {reasons.map((reason) => (
+        <div className="grid grid-cols-2 gap-y-9 sm:grid-cols-3 lg:grid-cols-6 lg:gap-y-0">
+          {reasons.map((reason, index) => (
             <article
-              key={reason.number}
-              className="group min-h-[220px] rounded-[26px] border border-white/10 bg-white/[0.04] p-7 transition duration-300 hover:-translate-y-1 hover:border-[#D4AF37]/40 hover:bg-white/[0.06]"
+              key={reason.title}
+              className={`px-3 text-center sm:px-5 ${
+                index !== reasons.length - 1
+                  ? "lg:border-r lg:border-white/10"
+                  : ""
+              }`}
             >
-              <div className="mb-8 flex items-center justify-between">
-                <span className="text-sm font-semibold tracking-[0.2em] text-[#D4AF37]">
-                  {reason.number}
-                </span>
-
-                <span className="text-[#D4AF37]/50 transition duration-300 group-hover:text-[#D4AF37]">
-                  ◆
-                </span>
+              <div className="mx-auto mb-3 flex h-[46px] w-[46px] items-center justify-center text-[29px] text-[#D4AF37]">
+                {reason.icon}
               </div>
 
-              <h3 className="text-xl font-semibold text-white">
+              <h3 className="text-[13px] font-semibold text-white">
                 {reason.title}
               </h3>
 
-              <p className="mt-3 leading-7 text-slate-400">
+              <p className="mx-auto mt-2 max-w-[175px] text-[11px] leading-[1.65] text-slate-300">
                 {reason.description}
               </p>
             </article>
           ))}
         </div>
+
       </div>
     </section>
   );

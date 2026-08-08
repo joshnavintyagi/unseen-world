@@ -1,39 +1,43 @@
 export default function FinalCTA() {
   return (
-    <section className="mx-auto max-w-[1400px] px-6 py-20 md:px-12">
-      <div className="relative overflow-hidden rounded-[36px] border border-white/10 bg-white/[0.04] px-8 py-16 text-center md:px-16 md:py-20">
-        
-        {/* subtle glow */}
-        <div className="pointer-events-none absolute left-1/2 top-0 h-72 w-72 -translate-x-1/2 rounded-full bg-[#D4AF37]/10 blur-[100px]" />
+    <section className="bg-[#06111d] px-5 pb-10 pt-3 sm:px-8 lg:px-12">
+      <div className="mx-auto max-w-[1280px]">
+        <div className="overflow-hidden rounded-[16px] border border-[#D4AF37]/45 bg-[#0b1721]">
+          <div className="grid min-h-[190px] md:grid-cols-[42%_58%]">
 
-        <div className="relative mx-auto max-w-3xl">
-          <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-[#D4AF37]">
-            Your journey starts here
-          </p>
+            {/* IMAGE */}
+            <div className="relative hidden overflow-hidden md:block">
+              <img
+                src="/images/luxury-interior.jpg"
+                alt="Luxury vehicle interior"
+                className="absolute inset-0 h-full w-full object-cover"
+              />
 
-          <h2 className="text-4xl font-semibold leading-tight text-white md:text-6xl">
-            Where would you like to go next?
-          </h2>
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-[#0b1721]/90" />
+            </div>
 
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-300">
-            Tell us where you want to go and how you like to travel.
-            We&apos;ll help create a journey built around you.
-          </p>
+            {/* CONTENT */}
+            <div className="relative flex items-center px-7 py-9 sm:px-10 lg:px-12">
+              <div>
+                <h2 className="font-serif text-[32px] leading-tight text-white sm:text-[38px]">
+                  Ready to travel beautifully?
+                </h2>
 
-          <div className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <a
-              href="#booking"
-              className="rounded-xl bg-[#D4AF37] px-8 py-4 font-semibold text-[#081220] transition hover:bg-[#E7C84B]"
-            >
-              Plan My Journey
-            </a>
+                <p className="mt-2 text-sm leading-6 text-slate-300 sm:text-[15px]">
+                  Tell us where you&apos;re going and we&apos;ll take care of
+                  the journey.
+                </p>
 
-            <a
-              href="#transfers"
-              className="rounded-xl border border-white/20 px-8 py-4 font-semibold text-white transition hover:border-[#D4AF37] hover:text-[#D4AF37]"
-            >
-              Explore Our Services
-            </a>
+                <a
+                  href="#booking"
+                  className="mt-5 inline-flex min-h-[48px] min-w-[180px] items-center justify-center gap-4 rounded-lg bg-[#D4AF37] px-7 text-sm font-semibold text-[#06111d] transition hover:bg-[#E7C84B]"
+                >
+                  Book Now
+                  <span aria-hidden="true">→</span>
+                </a>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
