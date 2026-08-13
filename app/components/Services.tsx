@@ -1,4 +1,5 @@
 "use client";
+
 const services = [
   {
     id: "transfers",
@@ -6,39 +7,51 @@ const services = [
     bookingService: "Airport Transfer",
     description:
       "Reliable and comfortable private transfers to and from airports across the UK.",
-    image: "/images/destinations/edinburgh-1.jpg",
+    image: "/images/services/airport-transfer.jpg",
     icon: "✈",
   },
   {
-    id: "tours",
+    id: "chauffeur",
     title: "Chauffeur Services",
-    bookingService: "Custom Journey",
+    bookingService: "Chauffeur Service",
     description:
       "Discreet professional chauffeur service for business, events and private travel.",
-    image: "/images/destinations/london-1.jpg",
+    image: "/images/services/chauffeur-services.jpg",
     icon: "♙",
   },
   {
     id: "experiences",
     title: "Tours & Experiences",
-    bookingService: "Private Tour",
+    bookingService: "Tours & Experiences",
     description:
       "Discover extraordinary destinations through tailor-made private tours and experiences.",
-    image: "/images/destinations/highlands-1.jpg",
+    image: "/images/services/tours-experiences.jpg",
     icon: "⌁",
   },
   {
-    id: "holidays",
+    id: "worldwide",
     title: "Worldwide Travel",
-    bookingService: "Worldwide Holiday",
+    bookingService: "Worldwide Travel",
     description:
       "Carefully planned worldwide journeys through our trusted travel network.",
-    image: "/images/destinations/london-2.jpg",
+    image: "/images/services/worldwide-travel.jpg",
     icon: "◎",
   },
 ];
 
 export default function Services() {
+  const selectService = (bookingService: string) => {
+    window.dispatchEvent(
+      new CustomEvent("select-booking-service", {
+        detail: bookingService,
+      })
+    );
+
+    document
+      .getElementById("booking")
+      ?.scrollIntoView({ behavior: "smooth", block: "center" });
+  };
+
   return (
     <section
       id="services"
@@ -58,18 +71,27 @@ export default function Services() {
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {services.map((service) => (
             <article
+              key={service.id}
               id={service.id}
-              key={service.title}
-              className="group overflow-hidden rounded-[16px] border border-[#D4AF37]/30 bg-[#091521] transition duration-300 hover:-translate-y-1 hover:border-[#D4AF37]/70"
+              role="button"
+              tabIndex={0}
+              onClick={() => selectService(service.bookingService)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  selectService(service.bookingService);
+                }
+              }}
+              className="group cursor-pointer overflow-hidden rounded-[18px] border border-[#D4AF37]/25 bg-[#091521] transition-all duration-300 hover:-translate-y-1 hover:border-[#D4AF37] hover:shadow-[0_20px_45px_rgba(212,175,55,0.18)]"
             >
-              <div className="relative h-[185px] overflow-hidden sm:h-[200px]">
+              <div className="relative h-[205px] overflow-hidden">
                 <img
                   src={service.image}
                   alt={service.title}
-                  className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                  className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
                 />
 
-                <div className="absolute inset-0 bg-gradient-to-t from-[#091521] via-transparent to-black/10" />
+                
               </div>
 
               <div className="relative px-5 pb-5">
@@ -81,30 +103,16 @@ export default function Services() {
                   {service.title}
                 </h3>
 
-                <p className="mt-2 text-[13px] leading-[1.65] text-slate-300 lg:min-h-[64px]">
+                <p className="mt-2 min-h-[64px] text-[13px] leading-[1.65] text-slate-300">
                   {service.description}
                 </p>
 
-                <a
-  href={`#booking?service=${encodeURIComponent(service.bookingService)}`}
-  onClick={(event) => {
-    event.preventDefault();
-
-    window.dispatchEvent(
-      new CustomEvent("select-booking-service", {
-        detail: service.bookingService,
-      })
-    );
-
-    document
-      .getElementById("booking")
-      ?.scrollIntoView({ behavior: "smooth", block: "center" });
-  }}
-  className="mt-4 inline-flex items-center gap-2 text-[13px] font-semibold text-[#D4AF37] transition hover:text-[#E7C84B]"
->
-                  Book Now
-                  <span aria-hidden="true">→</span>
-                </a>
+                <div className="mt-5">
+  <span className="inline-flex items-center gap-2 font-semibold text-[#D4AF37] transition-transform duration-300 group-hover:translate-x-1">
+    Book Now
+    <span>→</span>
+  </span>
+</div>
               </div>
             </article>
           ))}

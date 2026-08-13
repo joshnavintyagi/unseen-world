@@ -105,9 +105,46 @@ export async function POST(request: Request) {
       "";
 
     const passengers =
+      journey.travellers ||
       journey.passengers ||
       journey.passengerCount ||
       "";
+
+    const vehicle =
+      journey.vehicle ||
+      "";
+
+    const largeBags =
+      journey.largeBags ||
+      "0";
+
+    const cabinBags =
+      journey.cabinBags ||
+      "0";
+
+    const specialItem =
+      journey.specialItem ||
+      "None";
+
+    const luggageNotes =
+      journey.luggageNotes ||
+      "";
+
+    const childSeat =
+      journey.childSeat ||
+      "No";
+
+    const petTravel =
+      journey.petTravel ||
+      "No";
+
+    const petDetails =
+      journey.petDetails ||
+      "";
+
+    const additionalTravellers = Array.isArray(journey.additionalTravellers)
+      ? journey.additionalTravellers
+      : [];
 
     const message =
       journey.message ||
@@ -291,6 +328,97 @@ export async function POST(request: Request) {
                         ${escapeHtml(passengers)}
                       </td>
                     </tr>
+
+                    <tr>
+                      <td style="padding:12px 0;color:#8094ad;">
+                        Vehicle
+                      </td>
+                      <td style="padding:12px 0;color:#ffffff;">
+                        ${escapeHtml(vehicle)}
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td style="padding:12px 0;color:#8094ad;">
+                        Additional travellers
+                      </td>
+                      <td style="padding:12px 0;color:#ffffff;">
+                        ${escapeHtml(
+                          additionalTravellers.length
+                            ? additionalTravellers.join(", ")
+                            : "None"
+                        )}
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td style="padding:12px 0;color:#8094ad;">
+                        Large / check-in bags
+                      </td>
+                      <td style="padding:12px 0;color:#ffffff;">
+                        ${escapeHtml(largeBags)}
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td style="padding:12px 0;color:#8094ad;">
+                        Cabin / hand bags
+                      </td>
+                      <td style="padding:12px 0;color:#ffffff;">
+                        ${escapeHtml(cabinBags)}
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td style="padding:12px 0;color:#8094ad;">
+                        Special / oversized item
+                      </td>
+                      <td style="padding:12px 0;color:#ffffff;">
+                        ${escapeHtml(specialItem)}
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td style="padding:12px 0;color:#8094ad;">
+                        Luggage notes
+                      </td>
+                      <td style="padding:12px 0;color:#ffffff;">
+                        ${escapeHtml(luggageNotes)}
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td style="padding:12px 0;color:#8094ad;">
+                        Standard child seat
+                      </td>
+                      <td style="padding:12px 0;color:#ffffff;">
+                        ${escapeHtml(childSeat)}
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td style="padding:12px 0;color:#8094ad;">
+                        Travelling with a pet
+                      </td>
+                      <td style="padding:12px 0;color:#ffffff;">
+                        ${escapeHtml(petTravel)}
+                      </td>
+                    </tr>
+
+                    ${
+                      petTravel === "Yes"
+                        ? `
+                    <tr>
+                      <td style="padding:12px 0;color:#8094ad;">
+                        Pet details
+                      </td>
+                      <td style="padding:12px 0;color:#ffffff;">
+                        ${escapeHtml(petDetails)}
+                      </td>
+                    </tr>
+                        `
+                        : ""
+                    }
 
                     <tr>
                       <td style="padding:12px 0;color:#8094ad;">

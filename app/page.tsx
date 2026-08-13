@@ -1,3 +1,4 @@
+import FloatingWhatsApp from "./components/FloatingWhatsApp";
 import BookingSearch from "./components/BookingSearch";
 import Destinations from "./components/Destinations";
 import Footer from "./components/Footer";
@@ -27,6 +28,7 @@ export default function Home() {
       <WhyChoose />
       <FinalCTA />
       <Footer />
+      <FloatingWhatsApp />
     </main>
   );
 }

@@ -29,9 +29,12 @@ type JourneyDetails = {
   ticketedTravel: string;
   largeBags: string;
   cabinBags: string;
-  specialItem: string;
-  luggageNotes: string;
-  message: string;
+ specialItem: string;
+luggageNotes: string;
+childSeat: string;
+petTravel: string;
+petDetails: string;
+message: string;
 };
 
 type PlaceSuggestion = {
@@ -48,6 +51,7 @@ export default function BookingSearch() {
   const [travelDate, setTravelDate] = useState("");
   const [service, setService] = useState("Airport Transfer");
   const [selectedVehicle, setSelectedVehicle] = useState("");
+  const [travellingWithPet, setTravellingWithPet] = useState(false);
   const [travellerCount, setTravellerCount] = useState(1);
   const [showTravellerNames, setShowTravellerNames] = useState(false);
   const [ticketedTravel, setTicketedTravel] = useState("none");
@@ -70,7 +74,7 @@ export default function BookingSearch() {
 
   const isAirportTransfer = service === "Airport Transfer";
   const asksTicketedTravel =
-    service === "Worldwide Holiday" || service === "Custom Journey";
+  service === "Worldwide Travel" || service === "Custom Journey";
 
   const dateRef = useRef<HTMLInputElement>(null);
   const bookingRef = useRef<HTMLElement>(null);
@@ -340,6 +344,9 @@ export default function BookingSearch() {
       cabinBags: String(formData.get("cabinBags") || "0"),
       specialItem: String(formData.get("specialItem") || "None"),
       luggageNotes: String(formData.get("luggageNotes") || ""),
+      childSeat: String(formData.get("childSeat") || "No"),
+petTravel: String(formData.get("petTravel") || "No"),
+petDetails: String(formData.get("petDetails") || ""),
       message: String(formData.get("message") || ""),
     };
 
@@ -448,7 +455,19 @@ export default function BookingSearch() {
         lines.push(`Luggage notes: ${journey.luggageNotes}`);
       }
     }
+if (journey.childSeat === "Yes") {
+  lines.push("", "Additional requirements:", "Standard child seat required");
+}
 
+if (journey.petTravel === "Yes") {
+  if (journey.childSeat !== "Yes") {
+    lines.push("", "Additional requirements:");
+  }
+
+  lines.push(
+    `Travelling with a pet${journey.petDetails ? `: ${journey.petDetails}` : ""}`
+  );
+}
     if (journey.phone) {
       lines.push(`Phone: ${journey.phone}`);
     }
@@ -500,22 +519,23 @@ useEffect(() => {
 
     const validServices = [
       "Airport Transfer",
-      "Private Tour",
-      "Worldwide Holiday",
+      "Chauffeur Service",
+      "Tours & Experiences",
+      "Worldwide Travel",
       "Custom Journey",
     ];
 
     if (!validServices.includes(selectedService)) return;
 
     setService(selectedService);
-setSelectedVehicle("");
-setShowDetails(false);
-setSubmitted(false);
-setSubmittedJourney(null);
-setSubmitError("");
+    setSelectedVehicle("");
+    setShowDetails(false);
+    setSubmitted(false);
+    setSubmittedJourney(null);
+    setSubmitError("");
 
     if (
-      selectedService !== "Worldwide Holiday" &&
+      selectedService !== "Worldwide Travel" &&
       selectedService !== "Custom Journey"
     ) {
       setTicketedTravel("none");
@@ -1045,18 +1065,19 @@ setSubmitError("");
                   setService(nextService);
 
                   if (
-                    nextService !== "Worldwide Holiday" &&
-                    nextService !== "Custom Journey"
-                  ) {
-                    setTicketedTravel("none");
-                  }
+  nextService !== "Worldwide Travel" &&
+  nextService !== "Custom Journey"
+) {
+  setTicketedTravel("none");
+}
                 }}
                 className="h-12 w-full rounded-xl border border-white/10 bg-slate-950 px-3 text-sm text-white outline-none transition focus:border-[#D4AF37]"
               >
                 <option>Airport Transfer</option>
-                <option>Private Tour</option>
-                <option>Worldwide Holiday</option>
-                <option>Custom Journey</option>
+<option>Chauffeur Service</option>
+<option>Tours & Experiences</option>
+<option>Worldwide Travel</option>
+<option>Custom Journey</option>
               </select>
             </label>
 
@@ -1797,7 +1818,72 @@ setSubmitError("");
                   </label>
                 </div>
               )}
+{/* OPTIONAL REQUIREMENTS */}
+<div className="mt-5 rounded-2xl border border-white/10 bg-white/[0.025] p-4">
+  <div>
+    <p className="text-sm font-semibold text-white">
+      Additional requirements
+      <span className="ml-2 text-xs font-normal text-slate-500">
+        (optional)
+      </span>
+    </p>
 
+    <p className="mt-1 text-xs leading-5 text-slate-400">
+      Only select these if they apply to your journey.
+    </p>
+  </div>
+
+  <div className="mt-4 flex flex-col gap-3 sm:flex-row">
+    <label className="flex cursor-pointer items-center gap-3 rounded-xl border border-white/10 bg-slate-950 px-4 py-3 transition hover:border-[#D4AF37]/50">
+      <input
+        type="checkbox"
+        name="childSeat"
+        value="Yes"
+        className="h-4 w-4 accent-[#D4AF37]"
+      />
+
+      <span className="text-sm text-slate-200">
+        Standard child seat required
+      </span>
+    </label>
+
+    <label className="flex cursor-pointer items-center gap-3 rounded-xl border border-white/10 bg-slate-950 px-4 py-3 transition hover:border-[#D4AF37]/50">
+      <input
+  type="checkbox"
+  name="petTravel"
+  value="Yes"
+  checked={travellingWithPet}
+  onChange={(e) => setTravellingWithPet(e.target.checked)}
+  className="h-4 w-4 accent-[#D4AF37]"
+/>
+
+      <span className="text-sm text-slate-200">
+        Travelling with a pet
+      </span>
+    </label>
+  </div>
+  {travellingWithPet && (
+  <div className="mt-4">
+    <label className="block">
+      <span className="mb-2 block text-xs font-medium text-slate-300">
+        Tell us about your pet
+      </span>
+
+      <input
+        type="text"
+        name="petDetails"
+        required={travellingWithPet}
+        placeholder="e.g. small dog in carrier, medium dog, cat"
+        className="h-11 w-full rounded-xl border border-white/10 bg-slate-950 px-3 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-[#D4AF37]"
+      />
+
+      <span className="mt-2 block text-[11px] leading-5 text-slate-500">
+        Pet travel is subject to driver acceptance. Please tell us in advance so we can arrange a suitable vehicle.
+      </span>
+    </label>
+  </div>
+)}
+</div>
               <label className="mt-4 block">
                 <span className="mb-2 block text-xs font-medium text-slate-300">
                   Journey details or special requests

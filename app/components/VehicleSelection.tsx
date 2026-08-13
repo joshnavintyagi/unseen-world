@@ -7,32 +7,43 @@ type Vehicle = {
   image: string;
   passengerText: string;
   luggageText: string;
+  note?: string;
 };
 
 const vehicles: Vehicle[] = [
   {
-    id: "executive-sedan",
-    name: "Executive Sedan",
-    subtitle: "Mercedes E-Class or similar",
-    image: "/images/vehicles/executive-sedan.jpg",
-    passengerText: "Up to 3 passengers",
+    id: "standard-car",
+    name: "Standard Car",
+    subtitle: "Comfortable everyday private travel",
+   image: "/images/vehicles/UW_01_STANDARD_CAR.png",
+    passengerText: "Up to 4 passengers",
     luggageText: "Up to 2 large suitcases",
   },
   {
-    id: "luxury-mpv",
-    name: "Luxury MPV",
-    subtitle: "Mercedes V-Class or similar",
-    image: "/images/vehicles/luxury-mpv.jpg",
-    passengerText: "6 passengers + hand luggage",
-    luggageText: "or 4 passengers + 4 large suitcases",
+    id: "executive-car",
+    name: "Executive Car",
+    subtitle: "Premium vehicle category",
+    image: "/images/vehicles/UW_02_EXECUTIVE_CAR.png",
+    passengerText: "Up to 4 passengers",
+    luggageText: "Up to 2 large suitcases",
   },
   {
-    id: "executive-van",
-    name: "Executive Van",
-    subtitle: "Mercedes Sprinter or similar",
-    image: "/images/vehicles/executive-van.jpg",
-    passengerText: "Up to 8 passengers",
-    luggageText: "Generous luggage capacity",
+    id: "people-carrier",
+    name: "People Carrier / MPV",
+    subtitle: "Extra space for passengers and luggage",
+    image: "/images/vehicles/UW_03_PEOPLE_CARRIER.png",
+    passengerText: "Up to 6 passengers with hand luggage",
+    luggageText:
+      "5 passengers + 2 large suitcases, or 4 passengers + 4 large suitcases",
+    note: "Large suitcase guideline: approximately 23 kg each.",
+  },
+  {
+    id: "large-vehicle",
+    name: "Large Vehicle",
+    subtitle: "For larger groups and additional luggage",
+    image: "/images/vehicles/UW_04_LARGE_VEHICLE.png",
+    passengerText: "Up to 7 or 8 passengers",
+    luggageText: "Luggage capacity depends on passenger and seating configuration",
   },
 ];
 
@@ -46,22 +57,23 @@ export default function VehicleSelection({
   onSelectVehicle,
 }: VehicleSelectionProps) {
   return (
-    <div className="mt-6 border-t border-white/10 pt-6">
+    <div className="mt-6">
+      {/* SECTION HEADING */}
       <div className="mb-5">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#D4AF37]">
+        <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#D4AF37]">
           Choose Your Vehicle
         </p>
 
         <h3 className="mt-2 text-xl font-semibold text-white">
-          Travel in the space that suits you
+          Choose the space that suits your journey
         </h3>
 
         <p className="mt-2 text-sm leading-6 text-slate-400">
-          Select your preferred vehicle. Capacity may vary slightly depending
-          on luggage size and configuration.
+          Select a vehicle category suitable for your passengers and luggage.
         </p>
       </div>
 
+      {/* VEHICLE CARDS */}
       <div className="space-y-3">
         {vehicles.map((vehicle) => {
           const selected = selectedVehicle === vehicle.id;
@@ -71,21 +83,25 @@ export default function VehicleSelection({
               key={vehicle.id}
               type="button"
               onClick={() => onSelectVehicle(vehicle.id)}
-              className={`w-full overflow-hidden rounded-xl border text-left transition ${
+              aria-pressed={selected}
+              className={`group w-full cursor-pointer overflow-hidden rounded-xl border text-left transition duration-200 ${
                 selected
                   ? "border-[#D4AF37] bg-[#D4AF37]/[0.07]"
-                  : "border-white/10 bg-[#07111c]/70 hover:border-[#D4AF37]/50"
+                  : "border-white/10 bg-[#07111c]/70 hover:border-[#D4AF37]/60 hover:bg-[#0a1826]"
               }`}
             >
               <div className="grid items-center gap-4 p-3 sm:grid-cols-[150px_1fr_auto] sm:p-4">
-                <div className="h-[95px] overflow-hidden rounded-lg bg-black/20">
+                {/* VEHICLE IMAGE */}
+                <div className="flex h-[95px] items-center justify-center overflow-hidden rounded-lg bg-white/[0.025]">
                   <img
                     src={vehicle.image}
-                    alt={vehicle.name}
-                    className="h-full w-full object-cover"
+                    alt=""
+                    aria-hidden="true"
+                    className="h-full w-full object-contain p-2 transition duration-300 group-hover:scale-[1.04]"
                   />
                 </div>
 
+                {/* VEHICLE INFORMATION */}
                 <div>
                   <div className="flex flex-wrap items-center gap-2">
                     <h4 className="text-[16px] font-semibold text-white">
@@ -103,23 +119,45 @@ export default function VehicleSelection({
                     {vehicle.subtitle}
                   </p>
 
-                  <div className="mt-3 flex flex-col gap-1 text-[12px] text-slate-200">
-                    <span>♙ {vehicle.passengerText}</span>
-                    <span>▣ {vehicle.luggageText}</span>
+                  {/* CAPACITY */}
+                  <div className="mt-3 flex flex-col gap-1.5 text-[12px] text-slate-200">
+                    <span className="flex items-start gap-2">
+                      <span
+                        aria-hidden="true"
+                        className="mt-[2px] text-[#D4AF37]"
+                      >
+                        ●
+                      </span>
+
+                      <span>{vehicle.passengerText}</span>
+                    </span>
+
+                    <span className="flex items-start gap-2">
+                      <span
+                        aria-hidden="true"
+                        className="mt-[2px] text-[#D4AF37]"
+                      >
+                        ◆
+                      </span>
+
+                      <span>{vehicle.luggageText}</span>
+                    </span>
                   </div>
 
-                  {vehicle.id === "luxury-mpv" && (
+                  {/* OPTIONAL VEHICLE NOTE */}
+                  {vehicle.note && (
                     <p className="mt-2 text-[10px] leading-4 text-slate-500">
-                      Large suitcase guideline: approximately 23 kg each.
+                      {vehicle.note}
                     </p>
                   )}
                 </div>
 
+                {/* SELECT INDICATOR */}
                 <div
-                  className={`flex min-h-[42px] min-w-[105px] items-center justify-center rounded-lg border px-5 text-[12px] font-semibold ${
+                  className={`flex min-h-[42px] min-w-[105px] items-center justify-center rounded-lg border px-5 text-[12px] font-semibold transition ${
                     selected
                       ? "border-[#D4AF37] bg-[#D4AF37] text-[#06111d]"
-                      : "border-[#D4AF37]/60 text-[#D4AF37]"
+                      : "border-[#D4AF37]/60 text-[#D4AF37] group-hover:bg-[#D4AF37] group-hover:text-[#06111d]"
                   }`}
                 >
                   {selected ? "Selected ✓" : "Select"}
@@ -128,6 +166,15 @@ export default function VehicleSelection({
             </button>
           );
         })}
+      </div>
+
+      {/* VEHICLE DISCLAIMER */}
+      <div className="mt-4 rounded-lg border border-white/[0.07] bg-white/[0.025] px-4 py-3">
+        <p className="text-[10px] leading-[1.6] text-slate-500">
+          Vehicle images are for illustration only. Make and model may vary
+          depending on availability. Please choose a category suitable for
+          both your passenger and luggage requirements.
+        </p>
       </div>
     </div>
   );
