@@ -1,154 +1,132 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
+
+const navigation = [
+  { label: "Home", href: "/" },
+  { label: "Airport Transfers", href: "/airport-transfers" },
+  { label: "Chauffeur Services", href: "/chauffeur-services" },
+  { label: "Tours & Experiences", href: "/tours-experiences" },
+  { label: "Worldwide Travel", href: "/worldwide-travel" },
+  { label: "About Us", href: "/about" },
+  { label: "Contact", href: "/contact" },
+];
 
 export default function Header() {
+  const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
 
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 768) {
-        setMenuOpen(false);
-      }
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  const closeMenu = () => setMenuOpen(false);
-
   return (
-    <header className="absolute inset-x-0 top-0 z-50 border-b border-white/[0.06] bg-[#06111d]/40 backdrop-blur-md">
+    <header className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-[#06111d]/70 backdrop-blur-xl">
       <div className="mx-auto flex h-[88px] max-w-[1440px] items-center justify-between px-5 sm:px-8 lg:px-12">
-        <a href="/" className="flex items-center" aria-label="Unseen World">
-          <div className="flex flex-col">
-            <span className="whitespace-nowrap text-[17px] font-medium tracking-[0.25em] text-white sm:text-[20px]">
-              UNSEEN
-            </span>
 
-            <span className="mt-1 whitespace-nowrap text-[9px] font-semibold tracking-[0.42em] text-[#D4AF37] sm:text-[11px]">
-              WORLD
-            </span>
-          </div>
+        {/* Logo */}
 
-          <div className="-ml-1 flex h-[72px] w-[72px] items-center justify-center">
-            <img
-              src="/images/unseen-logo.png"
-              alt=""
-              className="h-[118px] w-[118px] max-w-none object-contain"
-            />
-          </div>
-        </a>
-
-        <nav
-          aria-label="Main navigation"
-          className="hidden items-center gap-7 text-[14px] text-white/90 md:flex lg:gap-9"
+        <Link
+          href="/"
+          className="flex items-center"
+          onClick={() => setMenuOpen(false)}
         >
-          <a href="#transfers" className="transition hover:text-[#D4AF37]">
-            Airport Transfers
-          </a>
+          <div>
+            <div className="text-[18px] tracking-[0.28em] text-white font-medium">
+              UNSEEN
+            </div>
 
-          <a href="#tours" className="transition hover:text-[#D4AF37]">
-            Chauffeur Services
-          </a>
+            <div className="mt-1 text-[10px] tracking-[0.42em] text-[#D4AF37] font-semibold">
+              WORLD
+            </div>
+          </div>
 
-          <a href="#experiences" className="transition hover:text-[#D4AF37]">
-            Tours & Experiences
-          </a>
+          <img
+            src="/images/unseen-logo.png"
+            alt="Unseen World"
+            className="ml-1 h-[70px] w-[70px] object-contain"
+          />
+        </Link>
 
-          <a href="#holidays" className="transition hover:text-[#D4AF37]">
-            Worldwide Travel
-          </a>
+        {/* Desktop Navigation */}
 
-          <a href="#about" className="transition hover:text-[#D4AF37]">
-            About Us
-          </a>
+        <nav className="hidden items-center gap-8 lg:flex">
 
-          <a href="#contact" className="transition hover:text-[#D4AF37]">
-            Contact
-          </a>
+          {navigation.map((item) => {
 
-          <a
-            href="#booking"
-            className="rounded-lg border border-[#D4AF37]/70 px-5 py-3 font-semibold text-[#D4AF37] transition hover:bg-[#D4AF37] hover:text-[#06111d]"
+            const active =
+              pathname === item.href ||
+              (pathname === "/" && item.href === "/");
+
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`relative px-1 py-2 text-[15px] font-medium transition-all duration-300 ${
+                  active
+                    ? "text-[#D4AF37]"
+                    : "text-white hover:text-[#D4AF37]"
+                }`}
+              >
+                {item.label}
+
+                {active && (
+                  <span className="absolute -bottom-2 left-0 h-[2px] w-full rounded bg-[#D4AF37]" />
+                )}
+              </Link>
+            );
+          })}
+
+          <Link
+            href="/#booking"
+            className="rounded-lg border border-[#D4AF37] px-5 py-3 font-semibold text-[#D4AF37] transition hover:bg-[#D4AF37] hover:text-[#06111d]"
           >
             Book Now
-          </a>
+          </Link>
         </nav>
 
+        {/* Mobile Button */}
+
         <button
-          type="button"
-          onClick={() => setMenuOpen((current) => !current)}
-          aria-expanded={menuOpen}
-          aria-controls="mobile-navigation"
-          aria-label={menuOpen ? "Close menu" : "Open menu"}
-          className="flex h-11 w-11 items-center justify-center rounded-xl border border-[#D4AF37]/40 text-[#D4AF37] md:hidden"
+          onClick={() => setMenuOpen(!menuOpen)}
+          className="flex h-11 w-11 items-center justify-center rounded-lg border border-[#D4AF37]/40 text-[#D4AF37] lg:hidden"
         >
-          {menuOpen ? (
-            <svg
-              viewBox="0 0 24 24"
-              className="h-5 w-5"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-            >
-              <path d="M6 6l12 12" />
-              <path d="M18 6 6 18" />
-            </svg>
-          ) : (
-            <svg
-              viewBox="0 0 24 24"
-              className="h-6 w-6"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-            >
-              <path d="M4 7h16" />
-              <path d="M4 12h16" />
-              <path d="M4 17h16" />
-            </svg>
-          )}
+          ☰
         </button>
       </div>
 
-      <div
-        id="mobile-navigation"
-        className={`overflow-hidden bg-[#06111d]/98 transition-all duration-300 md:hidden ${
-          menuOpen ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"
-        }`}
-      >
-        <nav className="flex flex-col px-5 pb-6">
-          {[
-            ["#transfers", "Airport Transfers"],
-            ["#tours", "Chauffeur Services"],
-            ["#experiences", "Tours & Experiences"],
-            ["#holidays", "Worldwide Travel"],
-            ["#about", "About Us"],
-            ["#contact", "Contact"],
-          ].map(([href, label]) => (
-            <a
-              key={href}
-              href={href}
-              onClick={closeMenu}
-              className="border-b border-white/[0.07] py-4 text-sm text-white/90"
-            >
-              {label}
-            </a>
-          ))}
+      {/* Mobile Menu */}
 
-          <a
-            href="#booking"
-            onClick={closeMenu}
-            className="mt-5 flex min-h-[50px] items-center justify-center rounded-xl bg-[#D4AF37] font-semibold text-[#06111d]"
-          >
-            Book Now
-          </a>
-        </nav>
-      </div>
+      {menuOpen && (
+        <div className="border-t border-white/10 bg-[#06111d] lg:hidden">
+
+          <nav className="flex flex-col px-6 py-5">
+
+            {navigation.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setMenuOpen(false)}
+                className={`border-b border-white/10 py-4 ${
+                  pathname === item.href
+                    ? "text-[#D4AF37]"
+                    : "text-white"
+                }`}
+              >
+                {item.label}
+              </Link>
+            ))}
+
+            <Link
+              href="/#booking"
+              onClick={() => setMenuOpen(false)}
+              className="mt-5 rounded-xl bg-[#D4AF37] py-3 text-center font-semibold text-[#06111d]"
+            >
+              Book Now
+            </Link>
+
+          </nav>
+
+        </div>
+      )}
     </header>
   );
 }
