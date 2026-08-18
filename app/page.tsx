@@ -1,3 +1,4 @@
+import BookingChoice from "./components/BookingChoice";
 import FloatingWhatsApp from "./components/FloatingWhatsApp";
 import BookingSearch from "./components/BookingSearch";
 import Destinations from "./components/Destinations";
@@ -14,13 +15,13 @@ export default function Home() {
     <main className="min-h-screen overflow-x-hidden bg-[#06111d]">
       <Header />
 
-      <div className="relative">
-        <Hero />
+      <Hero />
 
-        <div className="relative z-30 -mt-20 sm:-mt-24 lg:-mt-28">
-          <BookingSearch />
-        </div>
-      </div>
+<BookingChoice />
+
+<section id="booking">
+  <BookingSearch />
+</section>
 
       <Services />
       <Destinations />
