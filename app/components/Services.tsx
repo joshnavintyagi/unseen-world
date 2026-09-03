@@ -6,36 +6,40 @@ const services = [
     title: "Airport Transfers",
     bookingService: "Airport Transfer",
     description:
-      "Reliable and comfortable private transfers to and from airports across the UK.",
+      "Private airport collections and drop-offs with professional drivers, flight monitoring and personal support.",
     image: "/images/services/airport-transfer.jpg",
     icon: "✈",
+    number: "01",
   },
   {
     id: "chauffeur",
     title: "Chauffeur Services",
     bookingService: "Chauffeur Service",
     description:
-      "Discreet professional chauffeur service for business, events and private travel.",
+      "Discreet chauffeur travel for business journeys, private occasions, events and hourly hire.",
     image: "/images/services/chauffeur-services.jpg",
     icon: "♙",
+    number: "02",
   },
   {
     id: "experiences",
     title: "Tours & Experiences",
     bookingService: "Tours & Experiences",
     description:
-      "Discover extraordinary destinations through tailor-made private tours and experiences.",
+      "Private tours and carefully planned experiences across Scotland, the Highlands and beyond.",
     image: "/images/services/tours-experiences.jpg",
     icon: "⌁",
+    number: "03",
   },
   {
     id: "worldwide",
     title: "Worldwide Travel",
     bookingService: "Worldwide Travel",
     description:
-      "Carefully planned worldwide journeys through our trusted travel network.",
+      "Personalised holidays and international journeys arranged through our growing travel network.",
     image: "/images/services/worldwide-travel.jpg",
     icon: "◎",
+    number: "04",
   },
 ];
 
@@ -47,72 +51,94 @@ export default function Services() {
       })
     );
 
-    document
-      .getElementById("booking")
-      ?.scrollIntoView({ behavior: "smooth", block: "center" });
+    document.getElementById("booking")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
   };
 
   return (
     <section
       id="services"
-      className="bg-[#06111d] px-5 py-10 sm:px-8 sm:py-12 lg:px-12"
+      className="relative overflow-hidden bg-[#06111d] px-5 py-20 sm:px-8 sm:py-24 lg:px-12 lg:py-28"
     >
-      <div className="mx-auto max-w-[1280px]">
-        <div className="mb-7 text-center">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-[#D4AF37]">
-            Our Services
-          </p>
+      <div className="pointer-events-none absolute left-1/2 top-0 h-[420px] w-[900px] -translate-x-1/2 rounded-full bg-[#D4AF37]/[0.04] blur-[140px]" />
 
-          <h2 className="mt-2 font-serif text-[30px] leading-tight text-white sm:text-4xl">
-            Premium Travel Services
+      <div className="relative mx-auto max-w-[1380px]">
+        <div className="mx-auto mb-12 max-w-3xl text-center sm:mb-16">
+          <div className="flex items-center justify-center gap-4">
+            <span className="h-px w-10 bg-[#D4AF37]/70" />
+
+            <p className="text-[11px] font-semibold uppercase tracking-[0.32em] text-[#D4AF37]">
+              Our Services
+            </p>
+
+            <span className="h-px w-10 bg-[#D4AF37]/70" />
+          </div>
+
+          <h2 className="mt-5 font-serif text-[38px] leading-tight text-white sm:text-5xl lg:text-[56px]">
+            Travel, arranged around you
           </h2>
+
+          <p className="mx-auto mt-5 max-w-2xl text-[15px] leading-7 text-slate-300 sm:text-base">
+            From urgent airport journeys to carefully planned tours and
+            worldwide travel, choose the service that best suits your needs.
+          </p>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mx-auto grid max-w-sm gap-6 sm:max-w-none sm:grid-cols-2 xl:grid-cols-4">
           {services.map((service) => (
             <article
               key={service.id}
               id={service.id}
               role="button"
               tabIndex={0}
+              aria-label={`Select ${service.title}`}
               onClick={() => selectService(service.bookingService)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  e.preventDefault();
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
                   selectService(service.bookingService);
                 }
               }}
-              className="group cursor-pointer overflow-hidden rounded-[18px] border border-[#D4AF37]/25 bg-[#091521] transition-all duration-300 hover:-translate-y-1 hover:border-[#D4AF37] hover:shadow-[0_20px_45px_rgba(212,175,55,0.18)]"
+              className="group flex cursor-pointer flex-col overflow-hidden rounded-[26px] border border-white/10 bg-[#091521] shadow-[0_22px_65px_rgba(0,0,0,0.28)] transition-all duration-500 hover:-translate-y-2 hover:border-[#D4AF37]/70 hover:shadow-[0_30px_80px_rgba(0,0,0,0.48)] focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/70"
             >
-              <div className="relative h-[205px] overflow-hidden">
+              <div className="relative h-[255px] overflow-hidden sm:h-[275px]">
                 <img
                   src={service.image}
                   alt={service.title}
-                  className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
+                  className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.07]"
                 />
 
-                
-              </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#06111d] via-[#06111d]/20 to-black/5" />
 
-              <div className="relative px-5 pb-5">
-                <div className="-mt-7 mb-3 flex h-[54px] w-[54px] items-center justify-center rounded-full border border-[#D4AF37] bg-[#07111c] text-xl text-[#D4AF37] shadow-[0_8px_25px_rgba(0,0,0,0.4)]">
+                <span className="absolute right-5 top-5 text-xs font-semibold tracking-[0.25em] text-white/65">
+                  {service.number}
+                </span>
+
+                <div className="absolute bottom-5 left-5 flex h-14 w-14 items-center justify-center rounded-full border border-[#D4AF37]/75 bg-[#06111d]/85 text-xl text-[#D4AF37] shadow-[0_12px_30px_rgba(0,0,0,0.38)] backdrop-blur-md">
                   {service.icon}
                 </div>
+              </div>
 
-                <h3 className="text-[18px] font-medium text-white">
+              <div className="flex flex-1 flex-col px-6 pb-7 pt-5">
+                <h3 className="font-serif text-[25px] leading-tight text-white">
                   {service.title}
                 </h3>
 
-                <p className="mt-2 min-h-[64px] text-[13px] leading-[1.65] text-slate-300">
+                <p className="mt-4 flex-1 text-sm leading-6 text-slate-300">
                   {service.description}
                 </p>
 
-                <div className="mt-5">
-  <span className="inline-flex items-center gap-2 font-semibold text-[#D4AF37] transition-transform duration-300 group-hover:translate-x-1">
-    Book Now
-    <span>→</span>
-  </span>
-</div>
+                <div className="mt-7 border-t border-white/[0.08] pt-5">
+                  <span className="inline-flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.13em] text-[#D4AF37]">
+                    Book Now
+
+                    <span className="transition-transform duration-300 group-hover:translate-x-2">
+                      →
+                    </span>
+                  </span>
+                </div>
               </div>
             </article>
           ))}

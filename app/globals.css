@@ -47,3 +47,19 @@ body {
 .animate-whatsapp {
   animation: whatsappPulse 8s infinite;
 }
+html {
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll !important;
+}
+
+body {
+  width: 100%;
+  min-height: 100dvh;
+  height: auto !important;
+  max-height: none !important;
+  overflow-x: hidden !important;
+  overflow-y: visible !important;
+  position: static !important;
+  touch-action: pan-y;
+}

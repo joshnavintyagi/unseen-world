@@ -1,5 +1,6 @@
 import FloatingWhatsApp from "../components/FloatingWhatsApp";
 import BookingSearch from "../components/BookingSearch";
+import MobileQuickBooking from "../components/MobileQuickBooking";
 import Destinations from "../components/Destinations";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
@@ -21,7 +22,13 @@ export default function Home() {
           id="booking"
           className="relative z-30 -mt-20 scroll-mt-24 sm:-mt-24 lg:-mt-28"
         >
-          <BookingSearch />
+          <div className="md:hidden">
+            <MobileQuickBooking />
+          </div>
+
+          <div className="hidden md:block">
+            <BookingSearch />
+          </div>
         </section>
       </div>
 

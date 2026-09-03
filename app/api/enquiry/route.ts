@@ -110,10 +110,17 @@ export async function POST(request: Request) {
       journey.passengerCount ||
       "";
 
-    const vehicle =
-      journey.vehicle ||
-      "";
+    const vehicleMap: Record<string, string> = {
+  saloon: "Saloon",
+  executive: "Executive",
+  mpv: "MPV",
+  minibus: "Passenger Van",
+};
 
+const vehicle =
+  vehicleMap[journey.vehicle] ||
+  journey.vehicle ||
+  "";
     const largeBags =
       journey.largeBags ||
       "0";

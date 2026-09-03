@@ -6,20 +6,22 @@ export default function LandingPage() {
   );
 
   return (
-    <main className="relative min-h-screen overflow-x-hidden bg-[#06111d] text-white">
-      <img
-        src="/images/landing-hero.jpg"
-        alt=""
-        className="absolute inset-0 h-full w-full object-cover object-center"
-      />
+    <main className="relative min-h-[100dvh] w-full overflow-x-hidden bg-[#06111d] text-white">
+      <div className="absolute inset-0 min-h-full">
+        <img
+          src="/images/landing-hero.jpg"
+          alt=""
+          className="h-full min-h-[100dvh] w-full object-cover object-center"
+        />
 
-      <div className="absolute inset-0 bg-[#020914]/45" />
+        <div className="absolute inset-0 bg-[#020914]/45" />
 
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(3,12,24,0.18)_0%,rgba(3,12,24,0.48)_58%,rgba(3,12,24,0.76)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(3,12,24,0.18)_0%,rgba(3,12,24,0.48)_58%,rgba(3,12,24,0.76)_100%)]" />
 
-      <div className="absolute inset-0 bg-gradient-to-b from-[#020914]/20 via-transparent to-[#020914]/80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#020914]/20 via-transparent to-[#020914]/85" />
+      </div>
 
-      <section className="relative z-10 mx-auto flex min-h-screen w-full max-w-[920px] flex-col items-center px-5 py-7 sm:px-8 sm:py-10">
+      <section className="relative z-10 mx-auto flex min-h-[100dvh] w-full max-w-[920px] flex-col items-center px-5 pb-12 pt-7 sm:px-8 sm:py-10">
         <div className="flex items-center justify-center">
           <div className="text-left">
             <p className="text-[26px] font-medium leading-none tracking-[0.25em] text-white sm:text-[34px]">
@@ -48,7 +50,7 @@ export default function LandingPage() {
           </p>
         </div>
 
-        <div className="mt-5 grid w-full max-w-[860px] items-stretch gap-4 sm:mt-7 sm:grid-cols-2 sm:gap-5">
+        <div className="mt-5 grid w-full max-w-[860px] gap-4 sm:mt-7 sm:grid-cols-2 sm:gap-5">
           <a
             href={`https://wa.me/447856585000?text=${whatsappMessage}`}
             target="_blank"
@@ -70,7 +72,7 @@ export default function LandingPage() {
               </p>
             </div>
 
-            <span className="flex min-h-[48px] w-full shrink-0 items-center justify-center rounded-xl bg-[#25D366] px-5 font-semibold text-white transition group-hover:brightness-110">
+            <span className="flex min-h-[48px] w-full shrink-0 items-center justify-center rounded-xl bg-[#25D366] px-5 font-semibold text-white">
               WhatsApp Us
             </span>
           </a>
@@ -93,7 +95,7 @@ export default function LandingPage() {
               </p>
             </div>
 
-            <span className="flex min-h-[48px] w-full shrink-0 items-center justify-center rounded-xl bg-[#D4AF37] px-5 font-semibold text-[#06111d] transition group-hover:bg-[#E7C84B]">
+            <span className="flex min-h-[48px] w-full shrink-0 items-center justify-center rounded-xl bg-[#D4AF37] px-5 font-semibold text-[#06111d]">
               Enter Website →
             </span>
           </Link>

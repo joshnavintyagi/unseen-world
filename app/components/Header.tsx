@@ -2,6 +2,15 @@
 
 import { useEffect, useState } from "react";
 
+const navigationItems = [
+  { href: "/home#transfers", label: "Airport Transfers" },
+  { href: "/home#tours", label: "Chauffeur Services" },
+  { href: "/home#experiences", label: "Tours & Experiences" },
+  { href: "/home#holidays", label: "Worldwide Travel" },
+  { href: "/home#about", label: "About Us" },
+  { href: "/home#contact", label: "Contact" },
+];
+
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -20,59 +29,49 @@ export default function Header() {
   const closeMenu = () => setMenuOpen(false);
 
   return (
-    <header className="absolute inset-x-0 top-0 z-50 border-b border-white/[0.06] bg-[#06111d]/40 backdrop-blur-md">
-      <div className="mx-auto flex h-[88px] max-w-[1440px] items-center justify-between px-5 sm:px-8 lg:px-12">
-        <a href="/" className="flex items-center" aria-label="Unseen World">
+    <header className="absolute inset-x-0 top-0 z-50 border-b border-white/[0.07] bg-[#06111d]/75 backdrop-blur-xl">
+      <div className="mx-auto flex h-[92px] max-w-[1440px] items-center justify-between px-5 sm:px-8 lg:px-12">
+        <a
+          href="/"
+          aria-label="Unseen World landing page"
+          className="flex shrink-0 items-center"
+        >
           <div className="flex flex-col">
-            <span className="whitespace-nowrap text-[17px] font-medium tracking-[0.25em] text-white sm:text-[20px]">
+            <span className="whitespace-nowrap text-[21px] font-medium leading-none tracking-[0.27em] text-white sm:text-[24px]">
               UNSEEN
             </span>
 
-            <span className="mt-1 whitespace-nowrap text-[9px] font-semibold tracking-[0.42em] text-[#D4AF37] sm:text-[11px]">
+            <span className="mt-2 whitespace-nowrap text-[10px] font-semibold leading-none tracking-[0.48em] text-[#D4AF37] sm:text-[12px]">
               WORLD
             </span>
           </div>
 
-          <div className="-ml-1 flex h-[72px] w-[72px] items-center justify-center">
+          <div className="-ml-1 flex h-[82px] w-[82px] items-center justify-center sm:h-[88px] sm:w-[88px]">
             <img
               src="/images/unseen-logo.png"
               alt=""
-              className="h-[118px] w-[118px] max-w-none object-contain"
+              className="h-[132px] w-[132px] max-w-none object-contain sm:h-[145px] sm:w-[145px]"
             />
           </div>
         </a>
 
         <nav
           aria-label="Main navigation"
-          className="hidden items-center gap-7 text-[14px] text-white/90 md:flex lg:gap-9"
+          className="hidden items-center gap-6 text-[13px] font-medium text-white/85 md:flex lg:gap-8 lg:text-[14px]"
         >
-          <a href="#transfers" className="transition hover:text-[#D4AF37]">
-            Airport Transfers
-          </a>
-
-          <a href="#tours" className="transition hover:text-[#D4AF37]">
-            Chauffeur Services
-          </a>
-
-          <a href="#experiences" className="transition hover:text-[#D4AF37]">
-            Tours & Experiences
-          </a>
-
-          <a href="#holidays" className="transition hover:text-[#D4AF37]">
-            Worldwide Travel
-          </a>
-
-          <a href="#about" className="transition hover:text-[#D4AF37]">
-            About Us
-          </a>
-
-          <a href="#contact" className="transition hover:text-[#D4AF37]">
-            Contact
-          </a>
+          {navigationItems.map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className="whitespace-nowrap transition duration-200 hover:text-[#D4AF37]"
+            >
+              {item.label}
+            </a>
+          ))}
 
           <a
-            href="#booking"
-            className="rounded-lg border border-[#D4AF37]/70 px-5 py-3 font-semibold text-[#D4AF37] transition hover:bg-[#D4AF37] hover:text-[#06111d]"
+            href="/home#booking"
+            className="ml-1 flex min-h-[46px] items-center justify-center rounded-lg border border-[#D4AF37]/80 px-5 font-semibold text-[#D4AF37] transition duration-200 hover:bg-[#D4AF37] hover:text-[#06111d]"
           >
             Book Now
           </a>
@@ -84,7 +83,7 @@ export default function Header() {
           aria-expanded={menuOpen}
           aria-controls="mobile-navigation"
           aria-label={menuOpen ? "Close menu" : "Open menu"}
-          className="flex h-11 w-11 items-center justify-center rounded-xl border border-[#D4AF37]/40 text-[#D4AF37] md:hidden"
+          className="flex h-11 w-11 items-center justify-center rounded-xl border border-[#D4AF37]/50 bg-[#06111d]/70 text-[#D4AF37] transition hover:border-[#D4AF37] md:hidden"
         >
           {menuOpen ? (
             <svg
@@ -117,33 +116,28 @@ export default function Header() {
 
       <div
         id="mobile-navigation"
-        className={`overflow-hidden bg-[#06111d]/98 transition-all duration-300 md:hidden ${
-          menuOpen ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"
+        className={`overflow-hidden border-t border-white/[0.06] bg-[#06111d]/98 transition-all duration-300 md:hidden ${
+          menuOpen
+            ? "max-h-[620px] opacity-100"
+            : "max-h-0 border-transparent opacity-0"
         }`}
       >
         <nav className="flex flex-col px-5 pb-6">
-          {[
-            ["#transfers", "Airport Transfers"],
-            ["#tours", "Chauffeur Services"],
-            ["#experiences", "Tours & Experiences"],
-            ["#holidays", "Worldwide Travel"],
-            ["#about", "About Us"],
-            ["#contact", "Contact"],
-          ].map(([href, label]) => (
+          {navigationItems.map((item) => (
             <a
-              key={href}
-              href={href}
+              key={item.href}
+              href={item.href}
               onClick={closeMenu}
-              className="border-b border-white/[0.07] py-4 text-sm text-white/90"
+              className="border-b border-white/[0.07] py-4 text-sm font-medium text-white/90 transition hover:text-[#D4AF37]"
             >
-              {label}
+              {item.label}
             </a>
           ))}
 
           <a
-            href="#booking"
+            href="/home#booking"
             onClick={closeMenu}
-            className="mt-5 flex min-h-[50px] items-center justify-center rounded-xl bg-[#D4AF37] font-semibold text-[#06111d]"
+            className="mt-5 flex min-h-[50px] items-center justify-center rounded-xl bg-[#D4AF37] font-semibold text-[#06111d] transition hover:bg-[#E7C84B]"
           >
             Book Now
           </a>
