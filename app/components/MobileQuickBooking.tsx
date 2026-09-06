@@ -68,6 +68,12 @@ export default function MobileQuickBooking() {
   const [passengers, setPassengers] = useState(1);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [flightNumber, setFlightNumber] = useState("");
+  const [airline, setAirline] = useState("");
+  const [arrivingFrom, setArrivingFrom] = useState("");
+  const [childSeat, setChildSeat] = useState("No");
+  const [petTravel, setPetTravel] = useState("No");
+  const [petDetails, setPetDetails] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
@@ -252,9 +258,9 @@ if (!validPhone) {
       pickupHour,
       pickupMinute,
       pickupPeriod: "",
-      flightNumber: "",
-      airline: "",
-      arrivingFrom: "",
+      flightNumber: flightNumber.trim(),
+      airline: airline.trim(),
+      arrivingFrom: arrivingFrom.trim(),
       name: name.trim(),
       email: email.trim(),
       phone: phone.trim(),
@@ -265,9 +271,9 @@ if (!validPhone) {
       cabinBags: "Selected by vehicle capacity",
       specialItem: "None",
       luggageNotes: "",
-      childSeat: "No",
-      petTravel: "No",
-      petDetails: "",
+      childSeat,
+      petTravel,
+      petDetails: petDetails.trim(),
       message: message.trim(),
     };
 
@@ -775,5 +781,38 @@ function ErrorMessage({ message }: { message: string }) {
     >
       {message}
     </p>
+  );
+}
+
+
+function SelectRow({
+  label,
+  value,
+  onChange,
+  options,
+}: {
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+  options: string[];
+}) {
+  return (
+    <label className="block">
+      <span className="mb-2 block text-sm font-medium text-slate-300">
+        {label}
+      </span>
+
+      <select
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+        className="h-14 w-full rounded-xl border border-white/15 bg-[#040b13] px-4 text-base text-white outline-none focus:border-[#D4AF37]"
+      >
+        {options.map((option) => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
+      </select>
+    </label>
   );
 }

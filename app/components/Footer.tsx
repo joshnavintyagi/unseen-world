@@ -6,10 +6,9 @@ export default function Footer() {
     >
       <div className="mx-auto max-w-[1280px]">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.5fr_0.8fr_0.8fr_1fr]">
-
           {/* BRAND */}
           <div>
-            <a href="#" className="inline-flex items-center">
+            <a href="/home" className="inline-flex items-center">
               <div className="flex flex-col">
                 <span className="text-[18px] font-medium tracking-[0.32em] text-white">
                   UNSEEN
@@ -30,8 +29,8 @@ export default function Footer() {
             </a>
 
             <p className="mt-3 max-w-[300px] text-[12px] leading-5 text-slate-400">
-              Luxury airport transfers, chauffeur services, private tours
-              and worldwide travel — beautifully arranged around you.
+              Luxury airport transfers, chauffeur services, private tours and
+              worldwide travel — beautifully arranged around you.
             </p>
 
             <p className="mt-4 text-[10px] uppercase tracking-[0.18em] text-[#D4AF37]">
@@ -46,19 +45,31 @@ export default function Footer() {
             </h3>
 
             <div className="space-y-2.5 text-[12px] text-slate-300">
-              <a href="#transfers" className="block transition hover:text-[#D4AF37]">
+              <a
+                href="/home#transfers"
+                className="block transition hover:text-[#D4AF37]"
+              >
                 Airport Transfers
               </a>
 
-              <a href="#tours" className="block transition hover:text-[#D4AF37]">
+              <a
+                href="/home#tours"
+                className="block transition hover:text-[#D4AF37]"
+              >
                 Chauffeur Services
               </a>
 
-              <a href="#experiences" className="block transition hover:text-[#D4AF37]">
+              <a
+                href="/home#experiences"
+                className="block transition hover:text-[#D4AF37]"
+              >
                 Tours & Experiences
               </a>
 
-              <a href="#holidays" className="block transition hover:text-[#D4AF37]">
+              <a
+                href="/home#holidays"
+                className="block transition hover:text-[#D4AF37]"
+              >
                 Worldwide Travel
               </a>
             </div>
@@ -71,16 +82,32 @@ export default function Footer() {
             </h3>
 
             <div className="space-y-2.5 text-[12px] text-slate-300">
-              <a href="#about" className="block transition hover:text-[#D4AF37]">
+              <a
+                href="/home#about"
+                className="block transition hover:text-[#D4AF37]"
+              >
                 About Us
               </a>
 
-              <a href="#reviews" className="block transition hover:text-[#D4AF37]">
+              <a
+                href="/home#reviews"
+                className="block transition hover:text-[#D4AF37]"
+              >
                 Reviews
               </a>
 
-              <a href="#booking" className="block transition hover:text-[#D4AF37]">
+              <a
+                href="/home#booking"
+                className="block transition hover:text-[#D4AF37]"
+              >
                 Book a Journey
+              </a>
+
+              <a
+                href="/contact"
+                className="block transition hover:text-[#D4AF37]"
+              >
+                Contact
               </a>
 
               <a
@@ -145,16 +172,12 @@ export default function Footer() {
           </p>
 
           <div className="flex flex-wrap gap-x-5 gap-y-2">
-            <a href="#" className="transition hover:text-white">
+            <a href="/privacy" className="transition hover:text-white">
               Privacy Policy
             </a>
 
-            <a href="#" className="transition hover:text-white">
+            <a href="/terms" className="transition hover:text-white">
               Terms & Conditions
-            </a>
-
-            <a href="#" className="transition hover:text-white">
-              Cookie Policy
             </a>
           </div>
         </div>

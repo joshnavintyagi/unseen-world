@@ -12,6 +12,8 @@ type JourneyDetails = {
   pickup: string;
   destination: string;
   travelDate: string;
+  pickupTime: string;
+  vehicle: string;
   name: string;
   email: string;
   phone: string;

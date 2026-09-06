@@ -8,7 +8,7 @@ const navigationItems = [
   { href: "/home#experiences", label: "Tours & Experiences" },
   { href: "/home#holidays", label: "Worldwide Travel" },
   { href: "/home#about", label: "About Us" },
-  { href: "/home#contact", label: "Contact" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export default function Header() {
