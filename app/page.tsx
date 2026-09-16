@@ -23,22 +23,12 @@ export default function LandingPage() {
 
       <section className="relative z-10 mx-auto flex min-h-[100dvh] w-full max-w-[920px] flex-col items-center px-5 pb-12 pt-7 sm:px-8 sm:py-10">
         <div className="flex items-center justify-center">
-          <div className="text-left">
-            <p className="text-[26px] font-medium leading-none tracking-[0.25em] text-white sm:text-[34px]">
-              UNSEEN
-            </p>
-
-            <p className="mt-2 text-[12px] font-semibold leading-none tracking-[0.48em] text-[#D4AF37] sm:text-[16px]">
-              WORLD
-            </p>
-          </div>
-
-          <img
-            src="/images/unseen-logo.png"
-            alt="Unseen World"
-            className="ml-3 h-[96px] w-[96px] object-contain sm:ml-4 sm:h-[130px] sm:w-[130px]"
-          />
-        </div>
+  <img
+    src="/images/unseen-logo.png"
+    alt="Unseen World"
+    className="h-auto w-[280px] object-contain sm:w-[380px]"
+  />
+</div>
 
         <div className="mt-2 w-full text-center sm:mt-4">
           <h1 className="mx-auto max-w-[760px] font-serif text-[39px] leading-[1.05] tracking-[-0.025em] text-white sm:text-5xl lg:text-[58px]">
