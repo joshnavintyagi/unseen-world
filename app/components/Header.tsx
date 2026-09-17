@@ -36,23 +36,11 @@ export default function Header() {
           aria-label="Unseen World landing page"
           className="flex shrink-0 items-center"
         >
-          <div className="flex flex-col">
-            <span className="whitespace-nowrap text-[21px] font-medium leading-none tracking-[0.27em] text-white sm:text-[24px]">
-              UNSEEN
-            </span>
-
-            <span className="mt-2 whitespace-nowrap text-[10px] font-semibold leading-none tracking-[0.48em] text-[#D4AF37] sm:text-[12px]">
-              WORLD
-            </span>
-          </div>
-
-          <div className="-ml-1 flex h-[82px] w-[82px] items-center justify-center sm:h-[88px] sm:w-[88px]">
-            <img
-              src="/images/unseen-logo.png"
-              alt=""
-              className="h-[132px] w-[132px] max-w-none object-contain sm:h-[145px] sm:w-[145px]"
-            />
-          </div>
+          <img
+            src="/images/unseen-logo.png"
+            alt="Unseen World"
+            className="h-auto w-[125px] object-contain sm:w-[135px] lg:w-[145px]"
+          />
         </a>
 
         <nav
